@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Transportsystem_GoogleMaps.Models;
+using Transportsystem_GoogleMaps.ViewModels;
 
 namespace Transportsystem_GoogleMaps.Controllers
 {
@@ -30,7 +31,9 @@ namespace Transportsystem_GoogleMaps.Controllers
 
         public ActionResult New()
         {
-            return View();
+            var viewModel = new DriverFormViewModel();
+
+            return View("DriverForm", viewModel);
         }
 
         public ActionResult Edit(int id)
@@ -38,9 +41,36 @@ namespace Transportsystem_GoogleMaps.Controllers
             return View();
         }
 
+
         public ActionResult Delete(int id)
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(Driver driver)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new DriverFormViewModel(driver);
+                return View("DriverForm", viewModel);
+
+            }
+            if (driver.Id == 0)
+            {
+                _context.Drivers.Add(driver);
+            }
+            else
+            {
+                var driverInDb = _context.Drivers.Single(d => d.Id == driver.Id);
+                driverInDb.Name = driver.Name;
+                driverInDb.Name = driver.Name;
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Driver");
         }
     }
 }

@@ -1,0 +1,33 @@
+﻿@model Transportsystem_GoogleMaps.ViewModels.DriverFormViewModel
+@{
+    ViewBag.Title = "PackageForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DriverForm</h2>
+@using (Html.BeginForm("Save", "Driver"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors")
+    <div class="form-group">
+        @Html.LabelFor(d => d.Name)
+        @Html.TextBoxFor(d => d.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(d => d.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(d => d.PhoneNumber)
+        @Html.TextBoxFor(d => d.PhoneNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(d => d.PhoneNumber)
+    </div>
+    @Html.HiddenFor(d => d.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

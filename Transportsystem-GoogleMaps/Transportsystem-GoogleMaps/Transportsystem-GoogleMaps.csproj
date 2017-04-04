@@ -191,6 +191,7 @@
     <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DriverFormViewModel.cs" />
     <Compile Include="ViewModels\PackageFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -409,6 +410,7 @@
     <Content Include="Views\Package\Index.cshtml" />
     <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Package\PackageForm.cshtml" />
+    <Content Include="Views\Driver\DriverForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
