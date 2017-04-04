@@ -5,6 +5,9 @@
 }
 
 <h2>Packages</h2>
+<p>
+    @Html.ActionLink("New Package", "New", "Package", null, new { @class = "btn btn.btn-primary" })
+</p>
 <table id="packages" class="table table-bordered table-hover">
     <thead>
     <tr>
@@ -49,6 +52,22 @@
                     }
                    
                 ]
+            });
+
+            $("#packages").on("click",".js-delete", function() {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to delete this package?", function(result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/package/" + button.attr("data-package-id"),
+                            method: "DELETE",
+                            success: function() {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                 });
             });
         });
     </script>

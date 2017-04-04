@@ -53,7 +53,7 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
             _context.SaveChanges();
 
             packageDto.Id = package.Id;
-            return Created(new Uri(Request.RequestUri + "/" + package.Id.ToString()), packageDto);
+            return Created(new Uri(Request.RequestUri + "/" + package.Id), packageDto);
         }
 
         // PUT/Api/packages/1
