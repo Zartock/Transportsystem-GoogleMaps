@@ -38,7 +38,11 @@ namespace Transportsystem_GoogleMaps.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var driver = _context.Drivers.SingleOrDefault(d => d.Id == id);
+            if (driver == null)
+                return HttpNotFound();
+            var viewModel = new DriverFormViewModel(driver);
+            return View("DriverForm", viewModel);
         }
 
 

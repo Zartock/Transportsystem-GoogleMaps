@@ -38,7 +38,10 @@
                 },
                 columns: [
                     {
-                        data: "content"
+                        data: "content",
+                        render: function(data, type, package) {
+                            return "<a href='/package/edit/" + package.id + "'>" + package.content + "</a>";
+                        }
                         
                     },
                     {

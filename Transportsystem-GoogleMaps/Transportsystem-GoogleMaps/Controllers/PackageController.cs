@@ -41,7 +41,12 @@ namespace Transportsystem_GoogleMaps.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var package = _context.Packages.SingleOrDefault(p => p.Id == id);
+            if(package == null)
+                return HttpNotFound();
+            var viewModel = new PackageFormViewModel(package);
+            
+            return View("PackageForm", viewModel);
         }
 
         public ActionResult Delete(int id)
