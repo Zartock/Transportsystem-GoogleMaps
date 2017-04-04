@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Transportsystem_GoogleMaps.Models.Package>
+@{
+    ViewBag.Title = "Packages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Packages</h2>
+<table id="packages" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Content</th>
+        <th>Destination</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var package in Model)
+        {
+            <tr>
+                <td>@package.Content</td>
+                <td>@package.Destination</td>
+            </tr>               
+        }*@ 
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#packages").DataTable({
+                ajax: {
+                    url: "/api/package",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "content"
+                        
+                    },
+                    {
+                        data: "destination"
+                    },
+                    {
+                        data: "id",
+                        render: function(data) {
+                            return "<button class='btn-link js-delete' data-package-id=" + data + ">Delete</button>";
+                        }
+                    }
+                   
+                ]
+            });
+        });
+    </script>
+
+}
+
+
+

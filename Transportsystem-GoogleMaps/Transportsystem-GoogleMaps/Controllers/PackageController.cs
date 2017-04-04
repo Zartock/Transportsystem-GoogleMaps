@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using Transportsystem_GoogleMaps.Dtos;
 using Transportsystem_GoogleMaps.Models;
 
 namespace Transportsystem_GoogleMaps.Controllers
@@ -22,9 +24,12 @@ namespace Transportsystem_GoogleMaps.Controllers
         }
 
         // GET: Package
-        public ActionResult Index()
+        public ViewResult Index()
         {
-            return View();
+            var packages = _context.Packages
+                .ToList()
+                .Select(Mapper.Map<Package, PackageDto>);
+            return View("Index");
         }
 
         public ActionResult New()

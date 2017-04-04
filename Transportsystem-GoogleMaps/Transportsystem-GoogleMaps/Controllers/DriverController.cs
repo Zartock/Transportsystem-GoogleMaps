@@ -24,7 +24,8 @@ namespace Transportsystem_GoogleMaps.Controllers
         // GET: Driver
         public ActionResult Index()
         {
-            return View();
+            var drivers = _context.Drivers.ToList();
+            return View(drivers);
         }
 
         public ActionResult New()

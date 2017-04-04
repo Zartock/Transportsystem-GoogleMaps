@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Transportsystem_GoogleMaps.Models.Driver>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Drivers</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone Number</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var driver in Model)
+    {
+        <tr>
+            <td>@driver.Name</td>
+            <td>@driver.PhoneNumber</td>
+        </tr>
+    }
+    </tbody>
+</table>
+

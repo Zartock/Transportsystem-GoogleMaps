@@ -73,3 +73,11 @@ C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-Goog
 C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem-GoogleMaps.csproj.GenerateResource.Cache
 C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem_GoogleMaps.Migrations.PopulatePackages.resources
 C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem_GoogleMaps.Migrations.PopulateDrivers.resources
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\bin\AutoMapper.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\bin\AutoMapper.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\bin\System.Net.Http.Formatting.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\bin\System.Web.Http.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\bin\System.Web.Http.WebHost.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\bin\System.Net.Http.Formatting.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\bin\System.Web.Http.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\bin\System.Web.Http.WebHost.xml
