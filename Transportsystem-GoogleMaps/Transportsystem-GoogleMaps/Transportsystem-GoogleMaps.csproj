@@ -411,10 +411,10 @@
     <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Package\PackageForm.cshtml" />
     <Content Include="Views\Driver\DriverForm.cshtml" />
+    <Content Include="Views\Delivery\Deliveries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Delivery\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

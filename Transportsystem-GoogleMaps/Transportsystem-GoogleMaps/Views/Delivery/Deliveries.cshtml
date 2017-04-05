@@ -1,0 +1,43 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Deliveries";
+}
+
+<h2>Delivery</h2>
+
+<script>
+
+    function address(address,longitude,latitude) {
+        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+    function receiveJsonFromGoogleMaps() {
+
+        $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=Winnetka&key=AIzaSyCfR-nnn-eyRG42Qu0T_AnwttgCVuy8i88',
+            function(data) {
+
+                var addresses = [];
+                for (i = 0; i < data.results.length; i++) {
+                    addresses[i] = new address(data.results[i].formatted_address.toString(),
+                        data.results[i].geometry.location.lng.toString(),
+                        data.results[i].geometry.location.lat.toString());
+                    addresses.push(address);
+                    document.getElementById("address").innerHTML += "<li>" + addresses[i].address + "</li>";
+                    document.getElementById("longitude").innerHTML += "<li>" + addresses[i].longitude + "</li>";
+                    document.getElementById("latitude").innerHTML += "<li>" + addresses[i].latitude + "</li>";
+                }
+            });
+    }
+
+    window.onload = function () {
+        receiveJsonFromGoogleMaps();
+    };
+</script>
+
+<body>
+    <p id="address"> </p>
+    <p id="longitude"> </p>
+    <p id="latitude"> </p>
+</body>

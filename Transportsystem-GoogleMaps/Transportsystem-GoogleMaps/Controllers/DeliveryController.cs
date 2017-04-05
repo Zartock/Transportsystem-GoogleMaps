@@ -25,6 +25,11 @@ namespace Transportsystem_GoogleMaps.Controllers
         {
             return View();
         }
+        public ActionResult Deliveries()
+        {
+            return View();
+        }
+
 
         public ActionResult New()
         {
