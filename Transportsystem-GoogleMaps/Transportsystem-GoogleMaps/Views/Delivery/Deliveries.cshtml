@@ -13,7 +13,8 @@
 <body>
 <h2>Delivery</h2>
 <div id="map"></div>
-<button onclick="nextDestination()">Click me</button>
+<button onclick="previousDestination()">Previous</button>
+<button onclick="nextDestination()">Next</button>
 </body>
 
 <script>
@@ -63,8 +64,19 @@
     }
 
     function nextDestination() {
-        i += 1;
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
+        if (i < model.length - 2) {
+            i += 1;
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        }
+        
+    }
+
+    function previousDestination() {
+        if (i !== 0) {
+            i -= 1;
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        }
+        
     }
 
 </script>
