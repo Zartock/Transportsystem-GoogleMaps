@@ -6,12 +6,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Transportsystem_GoogleMaps.Models
 {
-    public struct CoOrds
+    /*public struct CoOrds
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
     
-    }
+    }*/
 
     public class Package
     {
@@ -28,7 +28,10 @@ namespace Transportsystem_GoogleMaps.Models
 
         public byte? Priority { get; set; }
 
-        public CoOrds? CoOrdinates { get; set; }
+        //public CoOrds? CoOrdinates { get; set; }
+
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
 
     }
 }

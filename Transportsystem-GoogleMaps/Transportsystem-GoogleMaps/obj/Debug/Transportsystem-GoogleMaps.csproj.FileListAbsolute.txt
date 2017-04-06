@@ -247,3 +247,4 @@ F:\OneDrive\Dataingenjör\Examensarbete\SystemTransport\Transportsystem-GoogleMa
 F:\OneDrive\Dataingenjör\Examensarbete\SystemTransport\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem-GoogleMaps.csproj.GenerateResource.Cache
 F:\OneDrive\Dataingenjör\Examensarbete\SystemTransport\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem-GoogleMaps.dll
 F:\OneDrive\Dataingenjör\Examensarbete\SystemTransport\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem-GoogleMaps.pdb
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem_GoogleMaps.Migrations.ChangingPackageCoOrdsFromStructToDoubles.resources
