@@ -1,33 +1,49 @@
-﻿@model IEnumerable<Transportsystem_GoogleMaps.Models.Package>
+﻿@model List<Transportsystem_GoogleMaps.Models.Package>
 
 @{
     ViewBag.Title = "Deliveries";
 }
-
-<h2>Delivery</h2>
-
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
 
 
 <body>
-    <ul>
-        @foreach (var package in Model)
-        {
-            <li>@package.Content</li>
-        }
-
-    </ul>
+    <h2>Delivery</h2>
+<div id="map"></div>
 
 </body>
 
-@section scripts
-{
-<script>
-        $(document).ready(function () {
-           
-            
+    <script>
 
-            
-        });
-</script>
+        function initMap() {
+            @{ int i = 0;}
 
+            var uluru = { lat: @Model[i].Latitude, lng: @Model[i].Longitude };
+            var map = new google.maps.Map(document.getElementById('map'),
+                {
+                    zoom: 4,
+                    center: uluru
+                });
+
+            for (var i = 0; i < 4; i++) {
+                var marker = new google.maps.Marker({
+                    position: { lat: @Model[3].Latitude, lng: @Model[3].Longitude },
+                    map: map
+
+                });
+               
+            }
+          
+
+
+        }
+    </script>
 }
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfR-nnn-eyRG42Qu0T_AnwttgCVuy8i88&callback=initMap">
+        </script>
+

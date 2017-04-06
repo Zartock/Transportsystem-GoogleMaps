@@ -26,7 +26,6 @@ namespace Transportsystem_GoogleMaps.Controllers
         // GET: Delivery
         public ActionResult Index()
         {
-            var json = new WebClient().DownloadString("https://maps.googleapis.com/maps/api/geocode/json?address=Winnetka&key=AIzaSyCfR-nnn-eyRG42Qu0T_AnwttgCVuy8i88");
             return View();
         }
         public ActionResult Deliveries()
