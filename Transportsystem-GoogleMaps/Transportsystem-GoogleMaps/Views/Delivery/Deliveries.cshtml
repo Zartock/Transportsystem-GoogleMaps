@@ -10,40 +10,34 @@
     }
 </style>
 
-
 <body>
-    <h2>Delivery</h2>
+<h2>Delivery</h2>
 <div id="map"></div>
 
 </body>
 
-    <script>
+<script>
+    function initMap() {
+        var model = @Html.Raw(Json.Encode(Model));
+       
 
-        function initMap() {
-            @{ int i = 0;}
-
-            var uluru = { lat: @Model[i].Latitude, lng: @Model[i].Longitude };
-            var map = new google.maps.Map(document.getElementById('map'),
-                {
-                    zoom: 4,
-                    center: uluru
-                });
-
-            for (var i = 0; i < 4; i++) {
-                var marker = new google.maps.Marker({
-                    position: { lat: @Model[3].Latitude, lng: @Model[3].Longitude },
-                    map: map
-
-                });
-               
-            }
-          
-
-
+        var center = { lat: model[0].Latitude, lng: model[0].Longitude };
+        var map = new google.maps.Map(document.getElementById('map'),
+            {
+                zoom: 8,
+                center: center
+            });
+              
+        for (var i = 0; i < model.length; i++) {
+            new google.maps.Marker({
+                position: { lat: model[i].Latitude, lng: model[i].Longitude },
+                map: map
+            });
         }
-    </script>
-}
+    }
+
+</script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfR-nnn-eyRG42Qu0T_AnwttgCVuy8i88&callback=initMap">
-        </script>
+</script>
 
