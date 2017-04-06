@@ -13,27 +13,58 @@
 <body>
 <h2>Delivery</h2>
 <div id="map"></div>
-
+<button onclick="nextDestination()">Click me</button>
 </body>
 
 <script>
+
+    var i = 0;
+    var model;
+    var directionsService;
+    var directionsDisplay;
     function initMap() {
-        var model = @Html.Raw(Json.Encode(Model));
-       
+        directionsService = new google.maps.DirectionsService;
+        directionsDisplay = new google.maps.DirectionsRenderer;
+        model = @Html.Raw(Json.Encode(Model));
+
 
         var center = { lat: model[0].Latitude, lng: model[0].Longitude };
+
+
         var map = new google.maps.Map(document.getElementById('map'),
-            {
-                zoom: 8,
-                center: center
-            });
-              
+        {
+            zoom: 7,
+            center: center
+        });
+        directionsDisplay.setMap(map);
+
         for (var i = 0; i < model.length; i++) {
             new google.maps.Marker({
                 position: { lat: model[i].Latitude, lng: model[i].Longitude },
                 map: map
             });
         }
+
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        directionsService.route({
+            origin: { lat: model[i].Latitude, lng: model[i].Longitude },
+            destination: { lat: model[i + 1].Latitude, lng: model[i + 1].Longitude },
+            travelMode: 'DRIVING'
+        }, function (response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    }
+
+    function nextDestination() {
+        i += 1;
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
 
 </script>
