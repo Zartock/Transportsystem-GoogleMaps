@@ -332,3 +332,5 @@ C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem-GoogleMaps.csproj.GenerateResource.Cache
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem-GoogleMaps.dll
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem-GoogleMaps.pdb
+C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem_GoogleMaps.Migrations.AddedTotalDistanceToDelivery.resources
+C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem_GoogleMaps.Migrations.clusterTest.resources

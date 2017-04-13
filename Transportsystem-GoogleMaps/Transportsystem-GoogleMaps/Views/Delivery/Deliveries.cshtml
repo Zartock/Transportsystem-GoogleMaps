@@ -1,4 +1,5 @@
-﻿@model List<Transportsystem_GoogleMaps.Models.Package>
+﻿@using Transportsystem_GoogleMaps.Models
+@model Transportsystem_GoogleMaps.ViewModels.DeliveryViewModel
 
 @{
     ViewBag.Title = "Deliveries";
@@ -15,6 +16,7 @@
 <div id="map"></div>
 <button onclick="previousDestination()">Previous</button>
 <button onclick="nextDestination()">Next</button>
+<p>Total Distance: @Model.TotalDistance km</p>
 </body>
 
 <script>
@@ -26,11 +28,9 @@
     function initMap() {
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
-        model = @Html.Raw(Json.Encode(Model));
-
+        model = @Html.Raw(Json.Encode(new List<Package>(Model.Packages)));
 
         var center = { lat: model[0].Latitude, lng: model[0].Longitude };
-
 
         var map = new google.maps.Map(document.getElementById('map'),
         {

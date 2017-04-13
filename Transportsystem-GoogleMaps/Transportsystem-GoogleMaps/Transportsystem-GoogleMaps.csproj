@@ -189,12 +189,22 @@
     <Compile Include="Migrations\201704060840099_ChangingPackageCoOrdsFromStructToDoubles.Designer.cs">
       <DependentUpon>201704060840099_ChangingPackageCoOrdsFromStructToDoubles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704131132311_AddedTotalDistanceToDelivery.cs" />
+    <Compile Include="Migrations\201704131132311_AddedTotalDistanceToDelivery.Designer.cs">
+      <DependentUpon>201704131132311_AddedTotalDistanceToDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704131334172_clusterTest.cs" />
+    <Compile Include="Migrations\201704131334172_clusterTest.Designer.cs">
+      <DependentUpon>201704131334172_clusterTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Delivery.cs" />
     <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\Package.cs" />
+    <Compile Include="Models\PackageCluster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DeliveryViewModel.cs" />
     <Compile Include="ViewModels\DriverFormViewModel.cs" />
     <Compile Include="ViewModels\PackageFormViewModel.cs" />
   </ItemGroup>
@@ -447,6 +457,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704060840099_ChangingPackageCoOrdsFromStructToDoubles.resx">
       <DependentUpon>201704060840099_ChangingPackageCoOrdsFromStructToDoubles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704131132311_AddedTotalDistanceToDelivery.resx">
+      <DependentUpon>201704131132311_AddedTotalDistanceToDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704131334172_clusterTest.resx">
+      <DependentUpon>201704131334172_clusterTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
