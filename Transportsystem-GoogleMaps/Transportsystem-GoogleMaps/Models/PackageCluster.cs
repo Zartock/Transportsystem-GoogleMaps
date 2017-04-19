@@ -7,12 +7,13 @@ namespace Transportsystem_GoogleMaps.Models
 {
     public class PackageCluster
     {
-        public LinkedList<Package> assignedPackages = new LinkedList<Package>();
-        public Package centroidPackage;
+        public LinkedList<Package> AssignedPackages = new LinkedList<Package>();
+        public Package CentroidPackage = new Package();
 
         public PackageCluster(Package centroidPackage)
         {
-            this.centroidPackage = centroidPackage;
+            CentroidPackage.Latitude = centroidPackage.Latitude;
+            CentroidPackage.Longitude = centroidPackage.Longitude;
         }
     }
 }

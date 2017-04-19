@@ -13,22 +13,31 @@
 
 <body>
 <h2>Delivery</h2>
+<button onclick="previousDelivery()">PreviousDelivery</button>
+
+<button onclick="nextDelivery()">NextDelivery</button>
 <div id="map"></div>
 <button onclick="previousDestination()">Previous</button>
 <button onclick="nextDestination()">Next</button>
 <p>Total Distance: @Model.TotalDistance km</p>
+<div id="directions"></div>
 </body>
 
 <script>
 
+    var selectedRoute = 0;
     var i = 0;
     var model;
+
+
     var directionsService;
     var directionsDisplay;
+
     function initMap() {
+        console.log("Selected: " + selectedRoute);
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
-        model = @Html.Raw(Json.Encode(new List<Package>(Model.Packages)));
+        model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(0).AssignedPackages)));
 
         var center = { lat: model[0].Latitude, lng: model[0].Longitude };
 
@@ -39,28 +48,66 @@
         });
         directionsDisplay.setMap(map);
 
-        for (var i = 0; i < model.length; i++) {
-            new google.maps.Marker({
-                position: { lat: model[i].Latitude, lng: model[i].Longitude },
+
+        new google.maps.Marker({
+            position: { lat: @Model.PackageClusters.ElementAt(0).CentroidPackage.Latitude.ToString().Replace(',','.'), lng: @Model.PackageClusters.ElementAt(0).CentroidPackage.Longitude.ToString().Replace(',', '.') },
+            map: map
+        });
+        new google.maps.Marker({
+            position: { lat: @Model.PackageClusters.ElementAt(1).CentroidPackage.Latitude.ToString().Replace(',', '.'), lng: @Model.PackageClusters.ElementAt(1).CentroidPackage.Longitude.ToString().Replace(',', '.') },
+            map: map
+        });
+        new google.maps.Marker({
+            position: { lat: @Model.PackageClusters.ElementAt(2).CentroidPackage.Latitude.ToString().Replace(',', '.'), lng: @Model.PackageClusters.ElementAt(2).CentroidPackage.Longitude.ToString().Replace(',', '.') },
+            map: map
+        });
+        new google.maps.Marker({
+                position: { lat: @Model.PackageClusters.ElementAt(3).CentroidPackage.Latitude.ToString().Replace(',', '.'), lng: @Model.PackageClusters.ElementAt(3).CentroidPackage.Longitude.ToString().Replace(',', '.') },
                 map: map
             });
-        }
+
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var wayPts = [];
+        for (var j = 0; j < model.length; j++) {
+            wayPts.push({
+                location: { lat: model[j].Latitude, lng: model[j].Longitude }
+            });
+        }
         directionsService.route({
-            origin: { lat: model[i].Latitude, lng: model[i].Longitude },
-            destination: { lat: model[i + 1].Latitude, lng: model[i + 1].Longitude },
-            travelMode: 'DRIVING'
-        }, function (response, status) {
-            if (status === 'OK') {
-                directionsDisplay.setDirections(response);
-            } else {
-                window.alert('Directions request failed due to ' + status);
-            }
-        });
+                origin: { lat: 59.246396, lng: 15.137283 },
+                destination: { lat: 59.246544, lng: 15.136656 },
+
+                waypoints: wayPts,
+                optimizeWaypoints: true,
+                travelMode: 'DRIVING'
+            },
+            function(response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+                    //showSteps(response, markerArray, stepDisplay, map);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+    }
+
+    function showSteps(directionResult, markerArray, stepDisplay, map) {
+        // For each step, place a marker, and add the text to the marker's infowindow.
+        // Also attach the marker to an array so we can keep track of it and remove it
+        // when calculating new routes.
+        var myRoute = directionResult.routes[0].legs[0];
+        for (var i = 0; i < myRoute.steps.length; i++) {
+            //var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
+            //marker.setMap(map);
+            //marker.setPosition(myRoute.steps[i].start_location);
+            //attachInstructionText(
+            //    stepDisplay, marker, myRoute.steps[i].instructions, map);
+            document.getElementById('directions').innerHTML += '<br>' + myRoute.steps[i].instructions;
+        }
     }
 
     function nextDestination() {
@@ -68,7 +115,7 @@
             i += 1;
             calculateAndDisplayRoute(directionsService, directionsDisplay);
         }
-        
+
     }
 
     function previousDestination() {
@@ -76,11 +123,66 @@
             i -= 1;
             calculateAndDisplayRoute(directionsService, directionsDisplay);
         }
-        
+
     }
+
+    function nextDelivery() {
+        if (selectedRoute < @Model.PackageClusters.Count-1) {
+            selectedRoute++;
+            i = 0;
+            switch (selectedRoute) {
+            case 0:
+                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(0).AssignedPackages)));
+                break;
+            case 1:
+                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(1).AssignedPackages)));
+                break;
+            case 2:
+                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(2).AssignedPackages)));
+                break;
+                case 3:
+                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(3).AssignedPackages)));
+                break;
+
+            }
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+            //console.log("Selected: " + selectedRoute);
+
+        }
+    }
+
+
+    function previousDelivery() {
+        if (selectedRoute !== 0) {
+            selectedRoute--;
+            i = 0;
+            switch (selectedRoute) {
+            case 0:
+                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(0).AssignedPackages)));
+                break;
+
+            case 1:
+                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(1).AssignedPackages)));
+                break;
+            case 2:
+                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(2).AssignedPackages)));
+                break;
+            case 3:
+                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(3).AssignedPackages)));
+                break;
+            }
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+            //console.log("Selected: " + selectedRoute);
+
+        }
+
+
+    }
+
+
+
 
 </script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfR-nnn-eyRG42Qu0T_AnwttgCVuy8i88&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMVIteB6a_vtVSunhpk56yZWeTSGN2CkM&callback=initMap">
 </script>
-

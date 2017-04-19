@@ -22,6 +22,21 @@ namespace Transportsystem_GoogleMaps.Models
 
         public double Latitude { get; set; } = 0;
         public double Longitude { get; set; } = 0;
-  
+
+        public Package()
+        {
+        }
+
+        public Package(Package package)
+        {
+            Content = package.Content;
+            Destination = package.Destination;
+            Priority = package.Priority;
+            Latitude = package.Latitude;
+            Longitude = package.Longitude;
+            
+
+        }
+
     }
 }

@@ -334,3 +334,5 @@ C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem-GoogleMaps.pdb
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem_GoogleMaps.Migrations.AddedTotalDistanceToDelivery.resources
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem_GoogleMaps.Migrations.clusterTest.resources
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem_GoogleMaps.Migrations.AddedTotalDistanceToDelivery.resources
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\obj\Debug\Transportsystem_GoogleMaps.Migrations.clusterTest.resources

@@ -14,10 +14,12 @@ namespace Transportsystem_GoogleMaps.Controllers
     public class DeliveryController : Controller
     {
         private ApplicationDbContext _context;
+        private LinkedList<PackageCluster> _deliveryOptions = new LinkedList<PackageCluster>();
 
         public DeliveryController()
         {
             _context = new ApplicationDbContext();
+             
         }
 
         protected override void Dispose(bool disposing)
@@ -40,7 +42,7 @@ namespace Transportsystem_GoogleMaps.Controllers
             List<Package> packagesWithData = new List<Package>();
             foreach (var package in packages)
             {
-                var json = new WebClient().DownloadString("https://maps.googleapis.com/maps/api/geocode/json?address=" + package.Destination + "&key=AIzaSyCfR-nnn-eyRG42Qu0T_AnwttgCVuy8i88");
+                var json = new WebClient().DownloadString("https://maps.googleapis.com/maps/api/geocode/json?address=" + package.Destination + "&key=AIzaSyBMVIteB6a_vtVSunhpk56yZWeTSGN2CkM");
                 var data = JObject.Parse(json);
                 package.Latitude = (double)data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lat");
                 package.Longitude = (double)data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lng");
@@ -50,19 +52,15 @@ namespace Transportsystem_GoogleMaps.Controllers
 
             Delivery d = new Delivery(drivers);
             d.Packages = new LinkedList<Package>(packages);
-            d.TotalDistance = d.CalculateRouteCost(d.Packages);
-            //d.clustering();
-            
+            d.TotalDistance = d.CalculateRouteCost(d.Packages);         
 
             DeliveryViewModel viewModel = new DeliveryViewModel
             {
-                Packages = d.Packages,
-                TotalDistance = d.TotalDistance
+                PackageClusters = d.clustering()
             };
 
             return View(viewModel);
         }
-
 
         public ActionResult New()
         {

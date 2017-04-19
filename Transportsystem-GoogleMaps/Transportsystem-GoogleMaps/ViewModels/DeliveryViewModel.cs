@@ -17,6 +17,6 @@ namespace Transportsystem_GoogleMaps.ViewModels
         public DateTime Date { get; set; }
         
 
-        public LinkedList<Package> Packages { get; set; }
+        public LinkedList<PackageCluster> PackageClusters { get; set; }
     }
 }
