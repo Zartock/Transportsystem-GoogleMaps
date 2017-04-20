@@ -14,11 +14,8 @@
 <body>
 <h2>Delivery</h2>
 <button onclick="previousDelivery()">PreviousDelivery</button>
-
 <button onclick="nextDelivery()">NextDelivery</button>
 <div id="map"></div>
-<button onclick="previousDestination()">Previous</button>
-<button onclick="nextDestination()">Next</button>
 <p>Total Distance: @Model.TotalDistance km</p>
 <div id="directions"></div>
 </body>
@@ -28,8 +25,6 @@
     var selectedRoute = 0;
     var i = 0;
     var model;
-
-
     var directionsService;
     var directionsDisplay;
 
@@ -47,7 +42,6 @@
             center: center
         });
         directionsDisplay.setMap(map);
-
 
         new google.maps.Marker({
             position: { lat: @Model.PackageClusters.ElementAt(0).CentroidPackage.Latitude.ToString().Replace(',','.'), lng: @Model.PackageClusters.ElementAt(0).CentroidPackage.Longitude.ToString().Replace(',', '.') },
@@ -82,8 +76,8 @@
                 destination: { lat: 59.246544, lng: 15.136656 },
 
                 waypoints: wayPts,
-                optimizeWaypoints: true,
-                travelMode: 'DRIVING'
+                optimizeWaypoints: false,
+                travelMode: 'WALKING'
             },
             function(response, status) {
                 if (status === 'OK') {
@@ -110,22 +104,6 @@
         }
     }
 
-    function nextDestination() {
-        if (i < model.length - 2) {
-            i += 1;
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
-        }
-
-    }
-
-    function previousDestination() {
-        if (i !== 0) {
-            i -= 1;
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
-        }
-
-    }
-
     function nextDelivery() {
         if (selectedRoute < @Model.PackageClusters.Count-1) {
             selectedRoute++;
@@ -143,11 +121,9 @@
                 case 3:
                 model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(3).AssignedPackages)));
                 break;
-
             }
             calculateAndDisplayRoute(directionsService, directionsDisplay);
             //console.log("Selected: " + selectedRoute);
-
         }
     }
 
@@ -173,14 +149,8 @@
             }
             calculateAndDisplayRoute(directionsService, directionsDisplay);
             //console.log("Selected: " + selectedRoute);
-
         }
-
-
     }
-
-
-
 
 </script>
 <script async defer
