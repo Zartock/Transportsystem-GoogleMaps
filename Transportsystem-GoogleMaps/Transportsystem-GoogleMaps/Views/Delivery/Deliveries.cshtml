@@ -16,12 +16,13 @@
 <button onclick="previousDelivery()">PreviousDelivery</button>
 <button onclick="nextDelivery()">NextDelivery</button>
 <div id="map"></div>
-<p>Total Distance: @Model.TotalDistance km</p>
+<p id="traveltime"></p>
 <div id="directions"></div>
+
 </body>
 
 <script>
-
+    var travelTime = 0;
     var selectedRoute = 0;
     var i = 0;
     var model;
@@ -78,11 +79,13 @@
 
                 waypoints: wayPts,
                 optimizeWaypoints: false,
-                travelMode: 'WALKING'
+                travelMode: 'DRIVING'
             },
             function(response, status) {
                 if (status === 'OK') {
                     directionsDisplay.setDirections(response);
+                    //console.log(response);
+                    getTotalTime(response);
                     //showSteps(response, markerArray, stepDisplay, map);
                 } else {
                     window.alert('Directions request failed due to ' + status);
@@ -103,6 +106,21 @@
             //    stepDisplay, marker, myRoute.steps[i].instructions, map);
             document.getElementById('directions').innerHTML += '<br>' + myRoute.steps[i].instructions;
         }
+    }
+
+    function getTotalTime(result) {
+        travelTime = 0;
+        var routeLegs = result.routes[0].legs;
+        console.log(routeLegs);
+        for (var leg = 0; leg < routeLegs.length; leg++) {
+            travelTime += routeLegs[leg].duration.value;
+        }
+        document.getElementById('traveltime').innerHTML = "Total travel time: ";
+        (travelTime / 3600 >= 1)
+            ? document.getElementById('traveltime').innerHTML += Math.floor(travelTime / 3600) + "h " + Math.round((travelTime - 3600 * (Math.floor(travelTime / 3600))) / 60) + "min"
+            : document.getElementById('traveltime').innerHTML += Math.round(travelTime / 60) + "min";
+        console.log(travelTime);
+        console.log((Math.floor(travelTime / 3600)));
     }
 
     function nextDelivery() {
