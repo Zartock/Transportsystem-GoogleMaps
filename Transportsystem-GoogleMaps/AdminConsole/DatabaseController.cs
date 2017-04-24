@@ -57,8 +57,17 @@ namespace AdminConsole
 
         public void Clustering()
         {
+
+            var routesToDelete = _context.DeliveryRoutes.ToList();
+            foreach (var route in routesToDelete)
+            {
+                _context.DeliveryRoutes.Remove(route);
+            }
+            _context.SaveChanges();
+
             var packages = GetPackages();
-            int drivers = GetDrivers().Count();
+            List<Driver> driverList = new List<Driver>(GetDrivers());
+            int drivers = driverList.Count();
 
             List<Package> packagesWithData = new List<Package>();
             foreach (var package in packages)
@@ -73,9 +82,40 @@ namespace AdminConsole
 
             Delivery d = new Delivery(drivers);
             d.Packages = new LinkedList<Package>(packages);
-            
+
 
             LinkedList<PackageCluster> clusters = d.clustering();
+
+            for (int i = 0; i < clusters.Count; i++)
+            {
+                List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
+                for (int j = 0; j < packageList.Count; j++)
+                {
+                    DeliveryRoute dr = new DeliveryRoute();
+                    dr.Driver = driverList.ElementAt(i);
+                    dr.Package = packageList.ElementAt(j);
+                    _context.DeliveryRoutes.Add(dr);
+                }
+            }
+            _context.SaveChanges();
+        }
+
+        public void GetRoute(int id)
+        {
+            Driver driver = _context.Drivers.SingleOrDefault(d => d.Id == id);
+            if (driver != null)
+            {
+                var packages = _context.Packages.ToList();
+                //List<DeliveryRoute> packageList = new List<DeliveryRoute>(_context.DeliveryRoutes.ToList().Where(o => o.Driver == driver));
+                //var deliveryRoutes = _context.DeliveryRoutes.ToList().Where(o => o.Driver == driver);
+                var firstList = _context.DeliveryRoutes.ToList();
+                List<DeliveryRoute> filteredList = firstList.FindAll(d => d.Driver == driver);
+            }
+            else
+            {
+                Console.WriteLine("No driver with that ID found");
+            }
+            
         }
 
 

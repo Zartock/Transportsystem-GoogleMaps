@@ -28,6 +28,7 @@ namespace AdminConsole
                 Console.WriteLine("1. Create new object");
                 Console.WriteLine("2. Display existing objects");
                 Console.WriteLine("3. Clustering");
+                Console.WriteLine("4. Get route");
                 Console.WriteLine("Type \"e\" to exit");
                 Console.WriteLine("");
                 Console.ResetColor();
@@ -42,6 +43,9 @@ namespace AdminConsole
                         break;
                     case "3":
                         Clustering();
+                        break;
+                    case "4":
+                        GetRouteSelection();
                         break;
                     case "e":
                         stayInLoop = false;
@@ -164,6 +168,7 @@ namespace AdminConsole
             for (int i = 1; i <= drivers.Count(); i++)
             {
                 Console.WriteLine(i + ".");
+                Console.WriteLine("    ID: " + drivers.ElementAt(i - 1).Id);
                 Console.WriteLine("    Name: " + drivers.ElementAt(i - 1).Name);
                 Console.WriteLine("    Phone number: " + drivers.ElementAt(i - 1).PhoneNumber);
                 Console.WriteLine("------------------------------");
@@ -192,5 +197,38 @@ namespace AdminConsole
         {
             _dbController.Clustering();
         }
+
+        public void GetRouteSelection()
+        {
+            Console.Clear();
+            Console.WriteLine("DRIVER LIST");
+            Console.WriteLine("-------------------------");
+
+            List<Driver> drivers = new List<Driver>(_dbController.GetDrivers());
+
+            for (int i = 1; i <= drivers.Count(); i++)
+            {
+                Console.WriteLine(i + ".");
+                Console.WriteLine("    ID: " + drivers.ElementAt(i - 1).Id);
+                Console.WriteLine("    Name: " + drivers.ElementAt(i - 1).Name);
+                Console.WriteLine("    Phone number: " + drivers.ElementAt(i - 1).PhoneNumber);
+                Console.WriteLine("------------------------------");
+            }
+
+            Console.WriteLine("");
+            Console.Write("Select ID of driver to view:  ");
+            try
+            {
+                int selected = Int32.Parse(Console.ReadLine());
+                _dbController.GetRoute(selected);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+        }
+
     }
 }

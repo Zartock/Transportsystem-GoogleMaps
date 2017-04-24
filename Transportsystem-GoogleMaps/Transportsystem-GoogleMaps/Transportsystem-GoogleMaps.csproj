@@ -197,9 +197,14 @@
     <Compile Include="Migrations\201704131334172_clusterTest.Designer.cs">
       <DependentUpon>201704131334172_clusterTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704241334579_addDeliveryRoutes.cs" />
+    <Compile Include="Migrations\201704241334579_addDeliveryRoutes.Designer.cs">
+      <DependentUpon>201704241334579_addDeliveryRoutes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Delivery.cs" />
+    <Compile Include="Models\DeliveryRoute.cs" />
     <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Models\PackageCluster.cs" />
@@ -464,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704131334172_clusterTest.resx">
       <DependentUpon>201704131334172_clusterTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704241334579_addDeliveryRoutes.resx">
+      <DependentUpon>201704241334579_addDeliveryRoutes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
