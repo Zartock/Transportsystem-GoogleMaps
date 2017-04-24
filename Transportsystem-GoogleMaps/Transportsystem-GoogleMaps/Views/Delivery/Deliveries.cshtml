@@ -60,7 +60,12 @@
         new google.maps.Marker({
                 position: { lat: @Model.PackageClusters.ElementAt(3).CentroidPackage.Latitude.ToString().Replace(',', '.'), lng: @Model.PackageClusters.ElementAt(3).CentroidPackage.Longitude.ToString().Replace(',', '.') },
                 map: map
-            });
+        });
+        new google.maps.Marker({
+                position: { lat: @Model.PackageClusters.ElementAt(4).CentroidPackage.Latitude.ToString().Replace(',', '.'), lng: @Model.PackageClusters.ElementAt(3).CentroidPackage.Longitude.ToString().Replace(',', '.') },
+                map: map
+        });
+        
 
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -137,8 +142,11 @@
             case 2:
                 model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(2).AssignedPackages)));
                 break;
-                case 3:
+            case 3:
                 model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(3).AssignedPackages)));
+                break;
+            case 4:
+                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(4).AssignedPackages)));
                 break;
             }
             calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -164,6 +172,9 @@
                 break;
             case 3:
                 model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(3).AssignedPackages)));
+                break;
+            case 4:
+                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(4).AssignedPackages)));
                 break;
             }
             calculateAndDisplayRoute(directionsService, directionsDisplay);
