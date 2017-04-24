@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Transportsystem_GoogleMaps.Models;
+using Transportsystem_GoogleMaps.ViewModels;
 
 namespace AdminConsole
 {
@@ -187,7 +190,7 @@ namespace AdminConsole
 
         public void Clustering()
         {
-            
+            _dbController.Clustering();
         }
     }
 }

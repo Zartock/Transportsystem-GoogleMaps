@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
 using AutoMapper;
+using Newtonsoft.Json.Linq;
 using Transportsystem_GoogleMaps.Models;
 using Transportsystem_GoogleMaps.Dtos;
+using Transportsystem_GoogleMaps.ViewModels;
 
 namespace AdminConsole
 {
@@ -51,6 +53,29 @@ namespace AdminConsole
         {
             _context.Drivers.Add(d);
             _context.SaveChanges();
+        }
+
+        public void Clustering()
+        {
+            var packages = GetPackages();
+            int drivers = GetDrivers().Count();
+
+            List<Package> packagesWithData = new List<Package>();
+            foreach (var package in packages)
+            {
+                var json = new WebClient().DownloadString("https://maps.googleapis.com/maps/api/geocode/json?address=" + package.Destination + "&key=AIzaSyBMVIteB6a_vtVSunhpk56yZWeTSGN2CkM");
+                var data = JObject.Parse(json);
+                package.Latitude = (double)data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lat");
+                package.Longitude = (double)data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lng");
+                packagesWithData.Add(package);
+            }
+            _context.SaveChanges();
+
+            Delivery d = new Delivery(drivers);
+            d.Packages = new LinkedList<Package>(packages);
+            
+
+            LinkedList<PackageCluster> clusters = d.clustering();
         }
 
 
