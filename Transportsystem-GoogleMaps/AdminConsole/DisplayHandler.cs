@@ -24,6 +24,7 @@ namespace AdminConsole
                 Console.WriteLine("-------------------------");
                 Console.WriteLine("1. Create new object");
                 Console.WriteLine("2. Display existing objects");
+                Console.WriteLine("3. Clustering");
                 Console.WriteLine("Type \"e\" to exit");
                 Console.WriteLine("");
                 Console.ResetColor();
@@ -35,6 +36,9 @@ namespace AdminConsole
                         break;
                     case "2":
                         ViewMenu();
+                        break;
+                    case "3":
+                        Clustering();
                         break;
                     case "e":
                         stayInLoop = false;
@@ -151,7 +155,17 @@ namespace AdminConsole
             Console.Clear();
             Console.WriteLine("DRIVER LIST");
             Console.WriteLine("-------------------------");
-            _dbController.GetDrivers();
+
+            List<Driver> drivers = new List<Driver>(_dbController.GetDrivers());
+
+            for (int i = 1; i <= drivers.Count(); i++)
+            {
+                Console.WriteLine(i + ".");
+                Console.WriteLine("    Name: " + drivers.ElementAt(i - 1).Name);
+                Console.WriteLine("    Phone number: " + drivers.ElementAt(i - 1).PhoneNumber);
+                Console.WriteLine("------------------------------");
+            }
+            Console.ReadLine();
         }
 
         public void PackageView()
@@ -159,7 +173,21 @@ namespace AdminConsole
             Console.Clear();
             Console.WriteLine("PACKAGE LIST");
             Console.WriteLine("-------------------------");
-            _dbController.GetPackages();
+            List<Package> packages = new List<Package>(_dbController.GetPackages());
+
+            for (int i = 1; i <= packages.Count(); i++)
+            {
+                Console.WriteLine(i + ".");
+                Console.WriteLine("    Content: " + packages.ElementAt(i - 1).Content);
+                Console.WriteLine("    Destination: " + packages.ElementAt(i - 1).Destination);
+                Console.WriteLine("------------------------------");
+            }
+            Console.ReadLine();
+        }
+
+        public void Clustering()
+        {
+            
         }
     }
 }

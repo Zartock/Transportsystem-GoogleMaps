@@ -25,34 +25,20 @@ namespace AdminConsole
             _context.Dispose();
         }
 
-        public void GetPackages()
+        public IEnumerable<Package> GetPackages()
         {
-            var packages = _context.Packages
+            return _context.Packages
                 .ToList();
                 
-            for (int i = 1; i <= packages.Count(); i++)
-            {
-                Console.WriteLine(i + ".");
-                Console.WriteLine("    Content: " + packages.ElementAt(i - 1).Content);
-                Console.WriteLine("    Destination: " + packages.ElementAt(i - 1).Destination);
-                Console.WriteLine("------------------------------");
-            }
-            Console.ReadLine();
+            
         }
 
-        public void GetDrivers()
+        public IEnumerable<Driver> GetDrivers()
         {
-            var drivers = _context.Drivers
+            return _context.Drivers
                 .ToList();
 
-            for (int i = 1; i <= drivers.Count(); i++)
-            {
-                Console.WriteLine(i + ".");
-                Console.WriteLine("    Name: " + drivers.ElementAt(i - 1).Name);
-                Console.WriteLine("    Phone number: " + drivers.ElementAt(i -1).PhoneNumber);
-                Console.WriteLine("------------------------------");
-            }
-            Console.ReadLine();
+            
         }
 
         public void SavePackage(Package p)
@@ -66,6 +52,8 @@ namespace AdminConsole
             _context.Drivers.Add(d);
             _context.SaveChanges();
         }
+
+
 
 
     }
