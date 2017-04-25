@@ -163,17 +163,45 @@ namespace AdminConsole
             Console.WriteLine("DRIVER LIST");
             Console.WriteLine("-------------------------");
 
-            List<Driver> drivers = new List<Driver>(_dbController.GetDrivers());
+            
+            bool stayInLoop = true;
 
-            for (int i = 1; i <= drivers.Count(); i++)
+            while (stayInLoop)
             {
-                Console.WriteLine(i + ".");
-                Console.WriteLine("    ID: " + drivers.ElementAt(i - 1).Id);
-                Console.WriteLine("    Name: " + drivers.ElementAt(i - 1).Name);
-                Console.WriteLine("    Phone number: " + drivers.ElementAt(i - 1).PhoneNumber);
-                Console.WriteLine("------------------------------");
+                List<Driver> drivers = new List<Driver>(_dbController.GetDrivers());
+                Console.Clear();
+                for (int i = 1; i <= drivers.Count(); i++)
+                {
+                    Console.WriteLine(i + ".");
+                    Console.WriteLine("    ID: " + drivers.ElementAt(i - 1).Id);
+                    Console.WriteLine("    Name: " + drivers.ElementAt(i - 1).Name);
+                    Console.WriteLine("    Phone number: " + drivers.ElementAt(i - 1).PhoneNumber);
+                    Console.WriteLine("------------------------------");
+                }
+                Console.WriteLine("");
+                Console.WriteLine("Modify: m {id}");
+                Console.WriteLine("Delete: d {id}");
+                Console.WriteLine("Exit: \"e\"");
+                string command = Console.ReadLine();
+                switch (command[0])
+                {
+                    case 'm':
+                        Console.WriteLine("Modify on ID: " + GetIdFromCommand(command));
+                        break;
+                    case 'd':
+                        Console.WriteLine("Delete on ID: " + GetIdFromCommand(command));
+                        _dbController.DeleteDriver(GetIdFromCommand(command));
+                        break;
+                    case 'e':
+                        Console.WriteLine("Exit");
+                        stayInLoop = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid command");
+                        break;
+                }
             }
-            Console.ReadLine();
+            
         }
 
         public void PackageView()
@@ -181,21 +209,56 @@ namespace AdminConsole
             Console.Clear();
             Console.WriteLine("PACKAGE LIST");
             Console.WriteLine("-------------------------");
-            List<Package> packages = new List<Package>(_dbController.GetPackages());
+            
+            bool stayInLoop = true;
 
-            for (int i = 1; i <= packages.Count(); i++)
+            while (stayInLoop)
             {
-                Console.WriteLine(i + ".");
-                Console.WriteLine("    Content: " + packages.ElementAt(i - 1).Content);
-                Console.WriteLine("    Destination: " + packages.ElementAt(i - 1).Destination);
-                Console.WriteLine("------------------------------");
-            }
-            Console.ReadLine();
+                List<Package> packages = new List<Package>(_dbController.GetPackages());
+                Console.Clear();
+                for (int i = 1; i <= packages.Count(); i++)
+                {
+                    Console.WriteLine(i + ".");
+                    Console.WriteLine("    ID: " + packages.ElementAt(i - 1).Id);
+                    Console.WriteLine("    Content: " + packages.ElementAt(i - 1).Content);
+                    Console.WriteLine("    Destination: " + packages.ElementAt(i - 1).Destination);
+                    Console.WriteLine("------------------------------");
+                }
+
+                Console.WriteLine("");
+                Console.WriteLine("Modify: m {id}");
+                Console.WriteLine("Delete: d {id}");
+                Console.WriteLine("Exit: \"e\"");
+                string command = Console.ReadLine();
+                switch (command[0])
+                {
+                    case 'm':
+                        Console.WriteLine("Modify on ID: " + GetIdFromCommand(command));
+                        
+                        break;
+                    case 'd':
+                        Console.WriteLine("Delete on ID: " + GetIdFromCommand(command));
+                        _dbController.DeletePackage(GetIdFromCommand(command));
+                        break;
+                    case 'e':
+                        Console.WriteLine("Exit");
+                        stayInLoop = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid command");
+                        break;
+                }
+            }        
         }
 
         public void Clustering()
         {
             _dbController.Clustering();
+        }
+
+        public int GetIdFromCommand(string command)
+        {
+            return Int32.Parse(command.Split(' ')[1]);
         }
 
         public void GetRouteSelection()

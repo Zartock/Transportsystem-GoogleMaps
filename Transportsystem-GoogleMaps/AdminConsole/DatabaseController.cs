@@ -43,15 +43,94 @@ namespace AdminConsole
             
         }
 
-        public void SavePackage(Package p)
+        public void SavePackage(Package package)
         {
-            _context.Packages.Add(p);
+
+            if (package.Id == 0)
+            {
+                _context.Packages.Add(package);
+            }
+            else
+            {
+                var packageInDb = _context.Packages.Single(p => p.Id == package.Id);
+                packageInDb.Content = package.Content;
+                packageInDb.Destination = package.Destination;
+            }
             _context.SaveChanges();
         }
 
-        public void SaveDriver(Driver d)
+        public void SaveDriver(Driver driver)
         {
-            _context.Drivers.Add(d);
+            if (driver.Id == 0)
+            {
+                _context.Drivers.Add(driver);
+            }
+            else
+            {
+                var driverInDb = _context.Drivers.Single(d => d.Id == driver.Id);
+                driverInDb.Name = driver.Name;
+                driverInDb.Name = driver.Name;
+            }
+            _context.SaveChanges();
+        }
+
+        public void DeletePackage(int id)
+        {
+            var packageInDb = _context.Packages.SingleOrDefault(p => p.Id == id);
+
+            if (packageInDb == null)
+                Console.WriteLine("No package with that ID in db");
+            else
+            {
+                DeletePackageFromRoute(packageInDb);
+                _context.Packages.Remove(packageInDb);
+                _context.SaveChanges();
+            }           
+        }
+
+        public void DeleteDriver(int id)
+        {
+            var driverInDb = _context.Drivers.SingleOrDefault(d => d.Id == id);
+
+            if (driverInDb == null)
+                Console.WriteLine("No driver with that ID in db");
+            else
+            {
+                DeleteDriverFromRoute(driverInDb);
+                _context.Drivers.Remove(driverInDb);
+                _context.SaveChanges();
+            }           
+        }
+
+        public void DeletePackageFromRoute(Package package)
+        {
+            var routes = _context.DeliveryRoutes.ToList();
+            DeliveryRoute routeInDb = null;
+            foreach (var route in routes)
+            {
+                if (route.Package == package)
+                {
+                    _context.DeliveryRoutes.Remove(route);
+                    break;
+                }
+                    
+            }
+            if(routeInDb == null)
+                Console.WriteLine("Package not assigned to route");
+            else
+            {
+                _context.SaveChanges();
+            }
+        }
+
+        public void DeleteDriverFromRoute(Driver driver)
+        {
+            var routes = _context.DeliveryRoutes.ToList();
+            foreach (var route in routes)
+            {
+                if (route.Driver == driver)
+                    _context.DeliveryRoutes.Remove(route);
+            }
             _context.SaveChanges();
         }
 
@@ -106,20 +185,13 @@ namespace AdminConsole
             if (driver != null)
             {
                 var packages = _context.Packages.ToList();
-                //List<DeliveryRoute> packageList = new List<DeliveryRoute>(_context.DeliveryRoutes.ToList().Where(o => o.Driver == driver));
-                //var deliveryRoutes = _context.DeliveryRoutes.ToList().Where(o => o.Driver == driver);
                 var firstList = _context.DeliveryRoutes.ToList();
                 List<DeliveryRoute> filteredList = firstList.FindAll(d => d.Driver == driver);
             }
             else
             {
                 Console.WriteLine("No driver with that ID found");
-            }
-            
+            }           
         }
-
-
-
-
     }
 }
