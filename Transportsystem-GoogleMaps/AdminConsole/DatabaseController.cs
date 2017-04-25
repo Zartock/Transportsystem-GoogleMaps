@@ -31,21 +31,26 @@ namespace AdminConsole
         {
             return _context.Packages
                 .ToList();
-                
-            
+        }
+
+        public Package GetPackageById(int id)
+        {
+            return _context.Packages.SingleOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<Driver> GetDrivers()
         {
             return _context.Drivers
                 .ToList();
+        }
 
-            
+        public Driver GetDriverById(int id)
+        {
+            return _context.Drivers.SingleOrDefault(d => d.Id == id);
         }
 
         public void SavePackage(Package package)
         {
-
             if (package.Id == 0)
             {
                 _context.Packages.Add(package);
@@ -74,6 +79,28 @@ namespace AdminConsole
             _context.SaveChanges();
         }
 
+        public void UpdateDriver(int id, Driver driver)
+        {
+            var driverInDb = _context.Drivers.SingleOrDefault(d => d.Id == id);
+
+
+            driverInDb.Name = driver.Name;
+            driverInDb.PhoneNumber = driver.PhoneNumber;
+
+            _context.SaveChanges();
+        }
+
+        public void UpdatePackage(int id, Package package)
+        {
+            var packageInDb = _context.Packages.SingleOrDefault(p => p.Id == id);
+
+
+            packageInDb.Content = package.Content;
+            packageInDb.Destination = package.Destination;
+
+            _context.SaveChanges();
+        }
+
         public void DeletePackage(int id)
         {
             var packageInDb = _context.Packages.SingleOrDefault(p => p.Id == id);
@@ -85,7 +112,7 @@ namespace AdminConsole
                 DeletePackageFromRoute(packageInDb);
                 _context.Packages.Remove(packageInDb);
                 _context.SaveChanges();
-            }           
+            }
         }
 
         public void DeleteDriver(int id)
@@ -99,7 +126,7 @@ namespace AdminConsole
                 DeleteDriverFromRoute(driverInDb);
                 _context.Drivers.Remove(driverInDb);
                 _context.SaveChanges();
-            }           
+            }
         }
 
         public void DeletePackageFromRoute(Package package)
@@ -113,9 +140,8 @@ namespace AdminConsole
                     _context.DeliveryRoutes.Remove(route);
                     break;
                 }
-                    
             }
-            if(routeInDb == null)
+            if (routeInDb == null)
                 Console.WriteLine("Package not assigned to route");
             else
             {
@@ -136,7 +162,6 @@ namespace AdminConsole
 
         public void Clustering()
         {
-
             var routesToDelete = _context.DeliveryRoutes.ToList();
             foreach (var route in routesToDelete)
             {
@@ -151,10 +176,14 @@ namespace AdminConsole
             List<Package> packagesWithData = new List<Package>();
             foreach (var package in packages)
             {
-                var json = new WebClient().DownloadString("https://maps.googleapis.com/maps/api/geocode/json?address=" + package.Destination + "&key=AIzaSyBMVIteB6a_vtVSunhpk56yZWeTSGN2CkM");
+                var json =
+                    new WebClient().DownloadString("https://maps.googleapis.com/maps/api/geocode/json?address=" +
+                                                   package.Destination + "&key=AIzaSyBMVIteB6a_vtVSunhpk56yZWeTSGN2CkM");
                 var data = JObject.Parse(json);
-                package.Latitude = (double)data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lat");
-                package.Longitude = (double)data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lng");
+                package.Latitude =
+                    (double) data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lat");
+                package.Longitude =
+                    (double) data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lng");
                 packagesWithData.Add(package);
             }
             _context.SaveChanges();
@@ -191,7 +220,7 @@ namespace AdminConsole
             else
             {
                 Console.WriteLine("No driver with that ID found");
-            }           
+            }
         }
     }
 }

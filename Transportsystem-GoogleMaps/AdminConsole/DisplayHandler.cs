@@ -17,7 +17,6 @@ namespace AdminConsole
 
         public void DiplayStart()
         {
-            
             bool stayInLoop = true;
             while (stayInLoop)
             {
@@ -85,10 +84,8 @@ namespace AdminConsole
                     default:
                         Console.WriteLine("Invalid input");
                         break;
-
                 }
             }
-            
         }
 
         public void ViewMenu()
@@ -119,42 +116,8 @@ namespace AdminConsole
                     default:
                         Console.WriteLine("Invalid input");
                         break;
-
                 }
             }
-        }
-
-        public void DriverCreation()
-        {
-            Driver d = new Driver(); 
-            Console.Clear();
-            Console.ForegroundColor = _color;
-            Console.WriteLine("DRIVER CREATION");
-            Console.WriteLine("-------------------------");
-            Console.ResetColor();
-            Console.WriteLine("");
-            Console.Write("Name: ");
-            d.Name = Console.ReadLine();
-            Console.Write("Phone: ");
-            d.PhoneNumber = Console.ReadLine();
-            _dbController.SaveDriver(d);
-        }
-
-        public void PackageCreation()
-        {
-            Package p  = new Package();
-            Console.Clear();
-            Console.ForegroundColor = _color;
-            Console.WriteLine("PACKAGE CREATION");
-            Console.WriteLine("-------------------------");
-            Console.ResetColor();
-            Console.WriteLine("");
-            Console.Write("Content: ");
-            p.Content = Console.ReadLine();
-            Console.Write("Destination: ");
-            p.Destination = Console.ReadLine();
-            _dbController.SavePackage(p);
-
         }
 
         public void DriverView()
@@ -163,7 +126,7 @@ namespace AdminConsole
             Console.WriteLine("DRIVER LIST");
             Console.WriteLine("-------------------------");
 
-            
+
             bool stayInLoop = true;
 
             while (stayInLoop)
@@ -183,25 +146,29 @@ namespace AdminConsole
                 Console.WriteLine("Delete: d {id}");
                 Console.WriteLine("Exit: \"e\"");
                 string command = Console.ReadLine();
-                switch (command[0])
+                if (!String.IsNullOrEmpty(command))
                 {
-                    case 'm':
-                        Console.WriteLine("Modify on ID: " + GetIdFromCommand(command));
-                        break;
-                    case 'd':
-                        Console.WriteLine("Delete on ID: " + GetIdFromCommand(command));
-                        _dbController.DeleteDriver(GetIdFromCommand(command));
-                        break;
-                    case 'e':
-                        Console.WriteLine("Exit");
-                        stayInLoop = false;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid command");
-                        break;
+                    switch (command[0])
+                    {
+                        case 'm':
+                            Console.WriteLine("Modify on ID: " + GetIdFromCommand(command));
+                            DriverModification(GetIdFromCommand(command));
+                            break;
+                        case 'd':
+                            Console.WriteLine("Delete on ID: " + GetIdFromCommand(command));
+                            _dbController.DeleteDriver(GetIdFromCommand(command));
+                            break;
+                        case 'e':
+                            Console.WriteLine("Exit");
+                            stayInLoop = false;
+                            break;
+                        default:
+                            Console.WriteLine("Invalid command");
+                            break;
+                    }
                 }
+                
             }
-            
         }
 
         public void PackageView()
@@ -209,7 +176,7 @@ namespace AdminConsole
             Console.Clear();
             Console.WriteLine("PACKAGE LIST");
             Console.WriteLine("-------------------------");
-            
+
             bool stayInLoop = true;
 
             while (stayInLoop)
@@ -230,26 +197,101 @@ namespace AdminConsole
                 Console.WriteLine("Delete: d {id}");
                 Console.WriteLine("Exit: \"e\"");
                 string command = Console.ReadLine();
-                switch (command[0])
+                if (!String.IsNullOrEmpty(command))
                 {
-                    case 'm':
-                        Console.WriteLine("Modify on ID: " + GetIdFromCommand(command));
-                        
-                        break;
-                    case 'd':
-                        Console.WriteLine("Delete on ID: " + GetIdFromCommand(command));
-                        _dbController.DeletePackage(GetIdFromCommand(command));
-                        break;
-                    case 'e':
-                        Console.WriteLine("Exit");
-                        stayInLoop = false;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid command");
-                        break;
+                    switch (command[0])
+                    {
+                        case 'm':
+                            Console.WriteLine("Modify on ID: " + GetIdFromCommand(command));
+                            PackageModification(GetIdFromCommand(command));
+                            break;
+                        case 'd':
+                            Console.WriteLine("Delete on ID: " + GetIdFromCommand(command));
+                            _dbController.DeletePackage(GetIdFromCommand(command));
+                            break;
+                        case 'e':
+                            Console.WriteLine("Exit");
+                            stayInLoop = false;
+                            break;
+                        default:
+                            Console.WriteLine("Invalid command");
+                            break;
+                    }
                 }
-            }        
+                
+            }
         }
+
+        public void DriverCreation()
+        {
+            Driver d = new Driver();
+            Console.Clear();
+            Console.ForegroundColor = _color;
+            Console.WriteLine("DRIVER CREATION");
+            Console.WriteLine("-------------------------");
+            Console.ResetColor();
+            Console.WriteLine("");
+            Console.Write("Name: ");
+            d.Name = Console.ReadLine();
+            Console.Write("Phone: ");
+            d.PhoneNumber = Console.ReadLine();
+            _dbController.SaveDriver(d);
+        }
+
+        public void PackageCreation()
+        {
+            Package p = new Package();
+            Console.Clear();
+            Console.ForegroundColor = _color;
+            Console.WriteLine("PACKAGE CREATION");
+            Console.WriteLine("-------------------------");
+            Console.ResetColor();
+            Console.WriteLine("");
+            Console.Write("Content: ");
+            p.Content = Console.ReadLine();
+            Console.Write("Destination: ");
+            p.Destination = Console.ReadLine();
+            _dbController.SavePackage(p);
+        }
+
+        public void DriverModification(int id)
+        {
+            var driverInDb = _dbController.GetDriverById(id);
+            Driver modedDriver = new Driver();
+            Console.Clear();
+            Console.ForegroundColor = _color;
+            Console.WriteLine("DRIVER MODIFICATION");
+            Console.WriteLine("-------------------------");
+            Console.Write("Previous Name: "); Console.ResetColor(); Console.Write(driverInDb.Name + "\n"); Console.ForegroundColor = _color;
+            Console.Write("Previous Phone: "); Console.ResetColor(); Console.Write(driverInDb.PhoneNumber + "\n"); Console.ForegroundColor = _color;
+            Console.WriteLine("");
+            Console.Write("New name: "); Console.ResetColor();
+            modedDriver.Name = Console.ReadLine();
+            Console.ForegroundColor = _color;
+            Console.Write("New phone: "); Console.ResetColor();
+            modedDriver.PhoneNumber = Console.ReadLine();
+            _dbController.UpdateDriver(id, modedDriver);
+        }
+
+        public void PackageModification(int id)
+        {
+            var packageInDb = _dbController.GetPackageById(id);
+            Package modedPackage = new Package();
+            Console.Clear();
+            Console.ForegroundColor = _color;
+            Console.WriteLine("DRIVER MODIFICATION");
+            Console.WriteLine("-------------------------");
+            Console.Write("Previous Content: "); Console.ResetColor(); Console.Write(packageInDb.Content + "\n"); Console.ForegroundColor = _color;
+            Console.Write("Previous Destination: "); Console.ResetColor(); Console.Write(packageInDb.Destination + "\n"); Console.ForegroundColor = _color;
+            Console.WriteLine("");
+            Console.Write("New Content: "); Console.ResetColor();
+            modedPackage.Content = Console.ReadLine();
+            Console.ForegroundColor = _color;
+            Console.Write("New Destination: "); Console.ResetColor();
+            modedPackage.Destination = Console.ReadLine();
+            _dbController.UpdatePackage(id, modedPackage);
+        }
+
 
         public void Clustering()
         {
@@ -290,8 +332,6 @@ namespace AdminConsole
                 Console.WriteLine(e);
                 throw;
             }
-            
         }
-
     }
 }
