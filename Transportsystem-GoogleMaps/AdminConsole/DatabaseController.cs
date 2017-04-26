@@ -132,21 +132,14 @@ namespace AdminConsole
         public void DeletePackageFromRoute(Package package)
         {
             var routes = _context.DeliveryRoutes.ToList();
-            DeliveryRoute routeInDb = null;
             foreach (var route in routes)
             {
                 if (route.Package == package)
                 {
                     _context.DeliveryRoutes.Remove(route);
-                    break;
                 }
             }
-            if (routeInDb == null)
-                Console.WriteLine("Package not assigned to route");
-            else
-            {
-                _context.SaveChanges();
-            }
+            _context.SaveChanges();
         }
 
         public void DeleteDriverFromRoute(Driver driver)

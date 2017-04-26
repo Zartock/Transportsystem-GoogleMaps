@@ -76,7 +76,20 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
             if (driverInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
+            DeleteDriverFromRoute(driverInDb);
+
             _context.Drivers.Remove(driverInDb);
+            _context.SaveChanges();
+        }
+
+        public void DeleteDriverFromRoute(Driver driver)
+        {
+            var routes = _context.DeliveryRoutes.ToList();
+            foreach (var route in routes)
+            {
+                if (route.Driver == driver)
+                    _context.DeliveryRoutes.Remove(route);
+            }
             _context.SaveChanges();
         }
     }

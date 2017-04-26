@@ -84,9 +84,23 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
             if (packageInDb == null)
                 return NotFound();
 
+            DeletePackageFromRoute(packageInDb);
             _context.Packages.Remove(packageInDb);
             _context.SaveChanges();
             return Ok();
+        }
+
+        public void DeletePackageFromRoute(Package package)
+        {
+            var routes = _context.DeliveryRoutes.ToList();
+            foreach (var route in routes)
+            {
+                if (route.Package == package)
+                {
+                    _context.DeliveryRoutes.Remove(route);
+                }
+            }
+            _context.SaveChanges();
         }
     }
 }
