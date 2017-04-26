@@ -23,9 +23,11 @@
 
 <script>
     var travelTime = 0;
+    var travelDistance = 0;
     var selectedRoute = 0;
     var i = 0;
     var model;
+    var wholeModel;
     var directionsService;
     var directionsDisplay;
 
@@ -34,7 +36,15 @@
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
         model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(0).AssignedPackages)));
-         console.log(model);
+        console.log("Model")
+        console.log(model);
+
+        wholeModel = @Html.Raw(Json.Encode(Model.PackageClusters));
+        console.log("wholeModel")
+        console.log(wholeModel);
+
+        console.log("wholeModel(1)")
+        console.log(wholeModel[1].CentroidPackage);
 
         var center = { lat: model[0].Latitude, lng: model[0].Longitude };
 
@@ -45,27 +55,13 @@
         });
         directionsDisplay.setMap(map);
 
-        new google.maps.Marker({
-            position: { lat: @Model.PackageClusters.ElementAt(0).CentroidPackage.Latitude.ToString().Replace(',','.'), lng: @Model.PackageClusters.ElementAt(0).CentroidPackage.Longitude.ToString().Replace(',', '.') },
+        for (var j = 0; j < wholeModel.length; j++) {
+            new google.maps.Marker({
+            position: { lat: wholeModel[j].CentroidPackage.Latitude, lng: wholeModel[j].CentroidPackage.Longitude },
             map: map
         });
-        new google.maps.Marker({
-            position: { lat: @Model.PackageClusters.ElementAt(1).CentroidPackage.Latitude.ToString().Replace(',', '.'), lng: @Model.PackageClusters.ElementAt(1).CentroidPackage.Longitude.ToString().Replace(',', '.') },
-            map: map
-        });
-        new google.maps.Marker({
-            position: { lat: @Model.PackageClusters.ElementAt(2).CentroidPackage.Latitude.ToString().Replace(',', '.'), lng: @Model.PackageClusters.ElementAt(2).CentroidPackage.Longitude.ToString().Replace(',', '.') },
-            map: map
-        });
-        new google.maps.Marker({
-                position: { lat: @Model.PackageClusters.ElementAt(3).CentroidPackage.Latitude.ToString().Replace(',', '.'), lng: @Model.PackageClusters.ElementAt(3).CentroidPackage.Longitude.ToString().Replace(',', '.') },
-                map: map
-        });
-        new google.maps.Marker({
-                position: { lat: @Model.PackageClusters.ElementAt(4).CentroidPackage.Latitude.ToString().Replace(',', '.'), lng: @Model.PackageClusters.ElementAt(3).CentroidPackage.Longitude.ToString().Replace(',', '.') },
-                map: map
-        });
-        
+        }
+
 
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -114,16 +110,20 @@
     }
 
     function getTotalTime(result) {
+        console.log(result);
         travelTime = 0;
         var routeLegs = result.routes[0].legs;
         console.log(routeLegs);
         for (var leg = 0; leg < routeLegs.length; leg++) {
             travelTime += routeLegs[leg].duration.value;
+            travelDistance += routeLegs[leg].distance.value;
         }
+        travelDistance /= 1000; 
         document.getElementById('traveltime').innerHTML = "Total travel time: ";
         (travelTime / 3600 >= 1)
             ? document.getElementById('traveltime').innerHTML += Math.floor(travelTime / 3600) + "h " + Math.round((travelTime - 3600 * (Math.floor(travelTime / 3600))) / 60) + "min"
             : document.getElementById('traveltime').innerHTML += Math.round(travelTime / 60) + "min";
+        document.getElementById('traveltime').innerHTML += "<br> Total travel distance: " + travelDistance.toFixed(2) + "km";
         console.log(travelTime);
         console.log((Math.floor(travelTime / 3600)));
     }
@@ -132,23 +132,7 @@
         if (selectedRoute < @Model.PackageClusters.Count-1) {
             selectedRoute++;
             i = 0;
-            switch (selectedRoute) {
-            case 0:
-                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(0).AssignedPackages)));
-                break;
-            case 1:
-                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(1).AssignedPackages)));
-                break;
-            case 2:
-                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(2).AssignedPackages)));
-                break;
-            case 3:
-                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(3).AssignedPackages)));
-                break;
-            case 4:
-                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(4).AssignedPackages)));
-                break;
-            }
+            model = wholeModel[selectedRoute].AssignedPackages;
             calculateAndDisplayRoute(directionsService, directionsDisplay);
             //console.log("Selected: " + selectedRoute);
         }
@@ -159,24 +143,7 @@
         if (selectedRoute !== 0) {
             selectedRoute--;
             i = 0;
-            switch (selectedRoute) {
-            case 0:
-                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(0).AssignedPackages)));
-                break;
-
-            case 1:
-                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(1).AssignedPackages)));
-                break;
-            case 2:
-                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(2).AssignedPackages)));
-                break;
-            case 3:
-                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(3).AssignedPackages)));
-                break;
-            case 4:
-                model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(4).AssignedPackages)));
-                break;
-            }
+            model = wholeModel[selectedRoute].AssignedPackages;
             calculateAndDisplayRoute(directionsService, directionsDisplay);
             //console.log("Selected: " + selectedRoute);
         }
