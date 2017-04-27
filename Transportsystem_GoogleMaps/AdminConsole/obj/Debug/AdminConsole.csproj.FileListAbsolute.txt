@@ -1,0 +1,96 @@
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\AdminConsole.exe.config
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\AdminConsole.exe
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\AdminConsole.pdb
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\obj\Debug\AdminConsole.exe
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\obj\Debug\AdminConsole.pdb
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\obj\Debug\AdminConsole.csprojResolveAssemblyReference.cache
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\ApplicationInsights.config
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\AutoMapper.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\EntityFramework.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\Transportsystem-GoogleMaps.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.Optimization.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.Mvc.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.Http.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\WebGrease.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.Razor.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\Antlr3.Runtime.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\Transportsystem-GoogleMaps.pdb
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\Transportsystem-GoogleMaps.dll.config
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\AutoMapper.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\EntityFramework.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.Optimization.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.Mvc.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.Http.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.Razor.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.xml
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\Antlr3.Runtime.pdb
+C:\Users\Viktor\Documents\Exjobb\Transportsystem-GoogleMaps\Transportsystem-GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\obj\Debug\AdminConsole.csprojResolveAssemblyReference.cache
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\obj\Debug\AdminConsole.exe
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\obj\Debug\AdminConsole.pdb
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\ApplicationInsights.config
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\AdminConsole.exe.config
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\AdminConsole.exe
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\AdminConsole.pdb
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\AutoMapper.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\EntityFramework.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Transportsystem_GoogleMaps.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Owin.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.Optimization.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.Mvc.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Owin.Security.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Owin.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.Http.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\WebGrease.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.Razor.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Antlr3.Runtime.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Transportsystem_GoogleMaps.pdb
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Transportsystem_GoogleMaps.dll.config
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\AutoMapper.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\EntityFramework.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Owin.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.Optimization.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.Mvc.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Owin.Security.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.Http.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.Razor.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Antlr3.Runtime.pdb
+C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.Deployment.xml
