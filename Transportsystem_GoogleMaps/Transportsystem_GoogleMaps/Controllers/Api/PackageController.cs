@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Configuration;
 using System.Web.Http;
 using AutoMapper;
+using Newtonsoft.Json.Linq;
 using Transportsystem_GoogleMaps.Dtos;
 using Transportsystem_GoogleMaps.Models;
 
@@ -49,8 +50,26 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
                 return BadRequest();
 
             var package = Mapper.Map<PackageDto, Package>(packageDto);
-            _context.Packages.Add(package);
-            _context.SaveChanges();
+
+
+            try
+            {
+                var json =
+                    new WebClient().DownloadString("https://maps.googleapis.com/maps/api/geocode/json?address=" +
+                                                   package.Destination +
+                                                   "&key=AIzaSyBMVIteB6a_vtVSunhpk56yZWeTSGN2CkM");
+                var data = JObject.Parse(json);
+                package.Latitude =
+                    (double) data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lat");
+                package.Longitude =
+                    (double) data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lng");
+                _context.Packages.Add(package);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
 
             packageDto.Id = package.Id;
             return Created(new Uri(Request.RequestUri + "/" + package.Id), packageDto);

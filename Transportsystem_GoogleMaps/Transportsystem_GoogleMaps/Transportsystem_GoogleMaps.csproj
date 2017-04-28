@@ -204,6 +204,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\DeliveryRouteController.cs" />
     <Compile Include="Controllers\Api\DriverController.cs" />
     <Compile Include="Controllers\Api\PackageController.cs" />
     <Compile Include="Controllers\DeliveryController.cs" />
@@ -220,6 +221,10 @@
     <Compile Include="Migrations\201704270703347_bigInitMigration.cs" />
     <Compile Include="Migrations\201704270703347_bigInitMigration.Designer.cs">
       <DependentUpon>201704270703347_bigInitMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704280814097_seedUsers.cs" />
+    <Compile Include="Migrations\201704280814097_seedUsers.Designer.cs">
+      <DependentUpon>201704280814097_seedUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -470,12 +475,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Delivery\Deliveries.cshtml" />
-    <Content Include="Views\Delivery\Display.cshtml" />
     <Content Include="Views\Driver\DriverForm.cshtml" />
     <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Package\Index.cshtml" />
     <Content Include="Views\Package\PackageForm.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Delivery\DriverDelivery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -498,6 +503,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201704270703347_bigInitMigration.resx">
       <DependentUpon>201704270703347_bigInitMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704280814097_seedUsers.resx">
+      <DependentUpon>201704280814097_seedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

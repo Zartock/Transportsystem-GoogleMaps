@@ -65,6 +65,11 @@ namespace Transportsystem_GoogleMaps.Controllers
                 return View("PackageForm", viewModel);
 
             }
+
+
+
+
+
             if (package.Id == 0)
             {
                 _context.Packages.Add(package);

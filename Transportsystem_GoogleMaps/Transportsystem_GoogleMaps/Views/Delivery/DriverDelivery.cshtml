@@ -1,0 +1,155 @@
+﻿@using Transportsystem_GoogleMaps.Models
+@model Transportsystem_GoogleMaps.ViewModels.DeliveryViewModel
+
+@{
+    ViewBag.Title = "Deliveries";
+}
+<style>
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+
+<body>
+<h2>Delivery</h2>
+<button onclick="previousDelivery()">PreviousDelivery</button>
+<button onclick="nextDelivery()">NextDelivery</button>
+<div id="map"></div>
+<p id="traveltime"></p>
+<div id="directions"></div>
+
+</body>
+
+<script>
+    var travelTime = 0;
+    var travelDistance = 0;
+    var selectedRoute = 0;
+    var i = 0;
+    var model;
+    var wholeModel;
+    var directionsService;
+    var directionsDisplay;
+
+    function initMap() {
+        console.log("Selected: " + selectedRoute);
+        directionsService = new google.maps.DirectionsService;
+        directionsDisplay = new google.maps.DirectionsRenderer;
+        model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(0).AssignedPackages)));
+        console.log("Model")
+        console.log(model);
+
+        wholeModel = @Html.Raw(Json.Encode(Model.PackageClusters));
+        console.log("wholeModel")
+        console.log(wholeModel);
+
+        console.log("wholeModel(1)")
+        console.log(wholeModel[1].CentroidPackage);
+
+        var center = { lat: 59.261897775, lng: 15.30572069518922 };
+
+        var map = new google.maps.Map(document.getElementById('map'),
+        {
+            zoom: 7,
+            center: center
+        });
+        directionsDisplay.setMap(map);
+
+        for (var j = 0; j < wholeModel.length; j++) {
+            new google.maps.Marker({
+            position: { lat: wholeModel[j].CentroidPackage.Latitude, lng: wholeModel[j].CentroidPackage.Longitude },
+            map: map
+        });
+        }
+
+
+
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var wayPts = [];
+        for (var j = 0; j < model.length; j++) {
+            wayPts.push({
+                location: model[j].Destination.toString()
+            });
+        }
+        directionsService.route({
+                origin: { lat: 59.246396, lng: 15.137283 },
+                destination: { lat: 59.246544, lng: 15.136656 },
+
+                waypoints: wayPts,
+                optimizeWaypoints: true,
+                travelMode: 'DRIVING'
+            },
+            function(response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+                    //console.log(response);
+                    getTotalTime(response);
+                    //showSteps(response, markerArray, stepDisplay, map);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+    }
+
+    function showSteps(directionResult, markerArray, stepDisplay, map) {
+        // For each step, place a marker, and add the text to the marker's infowindow.
+        // Also attach the marker to an array so we can keep track of it and remove it
+        // when calculating new routes.
+        var myRoute = directionResult.routes[0].legs[0];
+        for (var i = 0; i < myRoute.steps.length; i++) {
+            //var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
+            //marker.setMap(map);
+            //marker.setPosition(myRoute.steps[i].start_location);
+            //attachInstructionText(
+            //    stepDisplay, marker, myRoute.steps[i].instructions, map);
+            document.getElementById('directions').innerHTML += '<br>' + myRoute.steps[i].instructions;
+        }
+    }
+
+    function getTotalTime(result) {
+        console.log(result);
+        travelTime = 0;
+        var routeLegs = result.routes[0].legs;
+        console.log(routeLegs);
+        for (var leg = 0; leg < routeLegs.length; leg++) {
+            travelTime += routeLegs[leg].duration.value;
+            travelDistance += routeLegs[leg].distance.value;
+        }
+        travelDistance /= 1000; 
+        document.getElementById('traveltime').innerHTML = "Total travel time: ";
+        (travelTime / 3600 >= 1)
+            ? document.getElementById('traveltime').innerHTML += Math.floor(travelTime / 3600) + "h " + Math.round((travelTime - 3600 * (Math.floor(travelTime / 3600))) / 60) + "min"
+            : document.getElementById('traveltime').innerHTML += Math.round(travelTime / 60) + "min";
+        document.getElementById('traveltime').innerHTML += "<br> Total travel distance: " + travelDistance.toFixed(2) + "km";
+        console.log(travelTime);
+        console.log((Math.floor(travelTime / 3600)));
+    }
+
+    function nextDelivery() {
+        if (selectedRoute < @Model.PackageClusters.Count-1) {
+            selectedRoute++;
+            i = 0;
+            model = wholeModel[selectedRoute].AssignedPackages;
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+            //console.log("Selected: " + selectedRoute);
+        }
+    }
+
+
+    function previousDelivery() {
+        if (selectedRoute !== 0) {
+            selectedRoute--;
+            i = 0;
+            model = wholeModel[selectedRoute].AssignedPackages;
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+            //console.log("Selected: " + selectedRoute);
+        }
+    }
+
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMVIteB6a_vtVSunhpk56yZWeTSGN2CkM&callback=initMap">
+</script>

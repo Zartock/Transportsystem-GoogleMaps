@@ -8,8 +8,12 @@ namespace Transportsystem_GoogleMaps.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
+            if (User.IsInRole("DriverRole"))
+                return RedirectToAction("Deliveries", "Delivery");
+
             return View();
         }
 

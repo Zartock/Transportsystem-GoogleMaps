@@ -10,11 +10,17 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Packages", "Index", "Package")</li>
-                <li>@Html.ActionLink("Drivers", "Index", "Driver")</li>
-                <li>@Html.ActionLink("Deliveries", "Deliveries", "Delivery")</li>
+                @if (User.IsInRole("AdminRole"))
+                {
+                    <li>@Html.ActionLink("Packages", "Index", "Package")</li>
+                    <li>@Html.ActionLink("Drivers", "Index", "Driver")</li>
+                    <li>@Html.ActionLink("Deliveries", "Deliveries", "Delivery")</li> 
+                }               
             </ul>
-			@Html.Partial("_LoginPartial")
+            @Html.Partial("_LoginPartial")
         </div>
     </div>
 </div>
+
+
+

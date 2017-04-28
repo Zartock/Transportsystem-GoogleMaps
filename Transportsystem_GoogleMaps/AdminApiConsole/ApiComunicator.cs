@@ -133,7 +133,14 @@ namespace AdminApiConsole
             // Set the Method property of the request to POST.  
             request.Method = "DELETE";
             WebResponse response = request.GetResponse();
+        }
 
+        public void DeleteDeliveryRoutes()
+        {
+            WebRequest request = WebRequest.Create(serverURL + "/Api/DeliveryRoute/");
+            // Set the Method property of the request to POST.  
+            request.Method = "DELETE";
+            WebResponse response = request.GetResponse();
         }
 
         public void UpdatePackage(int id, Package p)

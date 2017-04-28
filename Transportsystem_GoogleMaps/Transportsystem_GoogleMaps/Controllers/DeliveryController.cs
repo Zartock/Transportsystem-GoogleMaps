@@ -62,6 +62,12 @@ namespace Transportsystem_GoogleMaps.Controllers
             return View(viewModel);
         }
 
+        //public ActionResult DriverDelivery(int id)
+        //{
+        //    var driver = _context.Drivers.SingleOrDefault(d => d.Id == id);
+
+        //}
+
         public ActionResult New()
         {
             return View();

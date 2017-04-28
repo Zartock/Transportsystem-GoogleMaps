@@ -7,12 +7,6 @@ using System.Web;
 namespace Transportsystem_GoogleMaps.Dtos
 {
 
-    public struct CoOrds
-    {
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-
-    }
 
     public class PackageDto
     {
@@ -26,6 +20,7 @@ namespace Transportsystem_GoogleMaps.Dtos
 
         public byte? Priority { get; set; }
 
-        public CoOrds? CoOrdinates { get; set; }
+        public double Latitude { get; set; } = 0;
+        public double Longitude { get; set; } = 0;
     }
 }
