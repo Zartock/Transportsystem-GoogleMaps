@@ -13,8 +13,8 @@
 
 <body>
 <h2>Delivery</h2>
-<button onclick="previousDelivery()">PreviousDelivery</button>
-<button onclick="nextDelivery()">NextDelivery</button>
+<button class="btn btn-primary" onclick="previousDelivery()">PreviousDelivery</button>
+<button class="btn btn-primary" onclick="nextDelivery()">NextDelivery</button>
 <div id="map"></div>
 <p id="traveltime"></p>
 <div id="directions"></div>
@@ -36,15 +36,8 @@
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
         model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(0).AssignedPackages)));
-        console.log("Model")
-        console.log(model);
 
         wholeModel = @Html.Raw(Json.Encode(Model.PackageClusters));
-        console.log("wholeModel")
-        console.log(wholeModel);
-
-        console.log("wholeModel(1)")
-        console.log(wholeModel[1].CentroidPackage);
 
         var center = { lat: 59.261897775, lng: 15.30572069518922 };
 
@@ -61,8 +54,6 @@
             map: map
         });
         }
-
-
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
@@ -85,7 +76,6 @@
             function(response, status) {
                 if (status === 'OK') {
                     directionsDisplay.setDirections(response);
-                    //console.log(response);
                     getTotalTime(response);
                     //showSteps(response, markerArray, stepDisplay, map);
                 } else {
@@ -124,8 +114,6 @@
             ? document.getElementById('traveltime').innerHTML += Math.floor(travelTime / 3600) + "h " + Math.round((travelTime - 3600 * (Math.floor(travelTime / 3600))) / 60) + "min"
             : document.getElementById('traveltime').innerHTML += Math.round(travelTime / 60) + "min";
         document.getElementById('traveltime').innerHTML += "<br> Total travel distance: " + travelDistance.toFixed(2) + "km";
-        console.log(travelTime);
-        console.log((Math.floor(travelTime / 3600)));
     }
 
     function nextDelivery() {
@@ -134,7 +122,6 @@
             i = 0;
             model = wholeModel[selectedRoute].AssignedPackages;
             calculateAndDisplayRoute(directionsService, directionsDisplay);
-            //console.log("Selected: " + selectedRoute);
         }
     }
 
@@ -145,7 +132,6 @@
             i = 0;
             model = wholeModel[selectedRoute].AssignedPackages;
             calculateAndDisplayRoute(directionsService, directionsDisplay);
-            //console.log("Selected: " + selectedRoute);
         }
     }
 

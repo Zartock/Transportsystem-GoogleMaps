@@ -95,32 +95,6 @@ C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps
 C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\Antlr3.Runtime.pdb
 C:\Users\Viktor\Documents\Visual Studio 2017\Projects\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\ApplicationInsights.config
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\csc.exe
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\csc.exe.config
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\csc.rsp
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\csi.exe
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\csi.rsp
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\Microsoft.CodeAnalysis.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\Microsoft.CSharp.Core.targets
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\Microsoft.DiaSymReader.Native.x86.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\System.AppContext.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\System.Collections.Immutable.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\System.Diagnostics.StackTrace.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\System.IO.FileSystem.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\System.IO.FileSystem.Primitives.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\System.Reflection.Metadata.dll
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\vbc.exe
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\vbc.exe.config
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\vbc.rsp
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\VBCSCompiler.exe
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\roslyn\VBCSCompiler.exe.config
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\AdminConsole.exe.config
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\AdminConsole.exe
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminConsole\bin\Debug\AdminConsole.pdb

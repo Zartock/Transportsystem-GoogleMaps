@@ -17,13 +17,7 @@
     </tr>
     </thead>
     <tbody>
-    @*@foreach (var driver in Model)
-    {
-        <tr>
-            <td>@driver.Name</td>
-            <td>@driver.PhoneNumber</td>
-        </tr>
-    }*@
+
     </tbody>
 </table>
 
@@ -53,7 +47,6 @@
                             return "<button class='btn-link js-delete' data-driver-id=" + data + ">Delete</button>";
                         }
                     }
-
                 ]
             });
 

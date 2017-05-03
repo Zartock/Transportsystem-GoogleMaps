@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -293,45 +294,25 @@ namespace AdminApiConsole
 
         public void Clustering()
         {
-            //_api.DeleteDeliveryRoutes();
+            _api.DeleteDeliveryRoutes();
+            var packages = _api.GetPackages();
+            var driverList = _api.GetDrivers();
+            int drivers = driverList.Count();
 
-            //var packages = _api.GetPackages();
-            //var driverList = _api.GetDrivers();
-            //int drivers = driverList.Count();
+            Delivery d = new Delivery(drivers, packages);
 
-            //List<Package> packagesWithData = new List<Package>();
-            //foreach (var package in packages)
-            //{
-            //    var json =
-            //        new WebClient().DownloadString("https://maps.googleapis.com/maps/api/geocode/json?address=" +
-            //                                       package.Destination + "&key=AIzaSyBMVIteB6a_vtVSunhpk56yZWeTSGN2CkM");
-            //    var data = JObject.Parse(json);
-            //    package.Latitude =
-            //        (double)data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lat");
-            //    package.Longitude =
-            //        (double)data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lng");
-            //    packagesWithData.Add(package);
-            //}
-            //_context.SaveChanges();
+            LinkedList<PackageCluster> clusters = d.clustering();
+            List<DeliveryRoute> routes = new List<DeliveryRoute>();
 
-            //Delivery d = new Delivery(drivers);
-            //d.Packages = new LinkedList<Package>(packages);
-
-
-            //LinkedList<PackageCluster> clusters = d.clustering();
-
-            //for (int i = 0; i < clusters.Count; i++)
-            //{
-            //    List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
-            //    for (int j = 0; j < packageList.Count; j++)
-            //    {
-            //        DeliveryRoute dr = new DeliveryRoute();
-            //        dr.Driver = driverList.ElementAt(i);
-            //        dr.Package = packageList.ElementAt(j);
-            //        _context.DeliveryRoutes.Add(dr);
-            //    }
-            //}
-            //_context.SaveChanges();
+            for (int i = 0; i < clusters.Count; i++)
+            {
+                List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
+                for (int j = 0; j < packageList.Count; j++)
+                {
+                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
+                }
+            }
+            _api.AddDeliveryRoutes(routes);
         }
 
         public int GetIdFromCommand(string command)
@@ -342,6 +323,16 @@ namespace AdminApiConsole
         public void GetRouteSelection()
         {
            
+        }
+
+        public static void printError(WebException e)
+        {
+            using (var stream = e.Response.GetResponseStream())
+            using (var reader = new StreamReader(stream))
+            {
+                Console.WriteLine("There was an error handling this request" + "   " + reader.ReadToEnd() + "\n Press any key to continue");
+                Console.ReadKey();
+            }
         }
     }
 }

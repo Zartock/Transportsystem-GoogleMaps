@@ -226,6 +226,42 @@
     <Compile Include="Migrations\201704280814097_seedUsers.Designer.cs">
       <DependentUpon>201704280814097_seedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705021441385_removeDeliveryFromDriver.cs" />
+    <Compile Include="Migrations\201705021441385_removeDeliveryFromDriver.Designer.cs">
+      <DependentUpon>201705021441385_removeDeliveryFromDriver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705030754404_addedPhoneNumberValidation.cs" />
+    <Compile Include="Migrations\201705030754404_addedPhoneNumberValidation.Designer.cs">
+      <DependentUpon>201705030754404_addedPhoneNumberValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705030758416_addedPhoneNumberValidation1.cs" />
+    <Compile Include="Migrations\201705030758416_addedPhoneNumberValidation1.Designer.cs">
+      <DependentUpon>201705030758416_addedPhoneNumberValidation1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705030910518_addedPhoneNumberValidation2.cs" />
+    <Compile Include="Migrations\201705030910518_addedPhoneNumberValidation2.Designer.cs">
+      <DependentUpon>201705030910518_addedPhoneNumberValidation2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705030922163_addedPhoneNumberValidation3.cs" />
+    <Compile Include="Migrations\201705030922163_addedPhoneNumberValidation3.Designer.cs">
+      <DependentUpon>201705030922163_addedPhoneNumberValidation3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705030926388_addedPhoneNumberValidation4.cs" />
+    <Compile Include="Migrations\201705030926388_addedPhoneNumberValidation4.Designer.cs">
+      <DependentUpon>201705030926388_addedPhoneNumberValidation4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705031134250_addedPhoneNumberValidation5.cs" />
+    <Compile Include="Migrations\201705031134250_addedPhoneNumberValidation5.Designer.cs">
+      <DependentUpon>201705031134250_addedPhoneNumberValidation5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705031140434_addedPhoneNumberValidation6.cs" />
+    <Compile Include="Migrations\201705031140434_addedPhoneNumberValidation6.Designer.cs">
+      <DependentUpon>201705031140434_addedPhoneNumberValidation6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705031157031_addedPhoneNumberValidation7.cs" />
+    <Compile Include="Migrations\201705031157031_addedPhoneNumberValidation7.Designer.cs">
+      <DependentUpon>201705031157031_addedPhoneNumberValidation7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -474,7 +510,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Delivery\Deliveries.cshtml" />
+    <Content Include="Views\Delivery\Index.cshtml" />
     <Content Include="Views\Driver\DriverForm.cshtml" />
     <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Package\Index.cshtml" />
@@ -506,6 +542,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704280814097_seedUsers.resx">
       <DependentUpon>201704280814097_seedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705021441385_removeDeliveryFromDriver.resx">
+      <DependentUpon>201705021441385_removeDeliveryFromDriver.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705030754404_addedPhoneNumberValidation.resx">
+      <DependentUpon>201705030754404_addedPhoneNumberValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705030758416_addedPhoneNumberValidation1.resx">
+      <DependentUpon>201705030758416_addedPhoneNumberValidation1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705030910518_addedPhoneNumberValidation2.resx">
+      <DependentUpon>201705030910518_addedPhoneNumberValidation2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705030922163_addedPhoneNumberValidation3.resx">
+      <DependentUpon>201705030922163_addedPhoneNumberValidation3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705030926388_addedPhoneNumberValidation4.resx">
+      <DependentUpon>201705030926388_addedPhoneNumberValidation4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705031134250_addedPhoneNumberValidation5.resx">
+      <DependentUpon>201705031134250_addedPhoneNumberValidation5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705031140434_addedPhoneNumberValidation6.resx">
+      <DependentUpon>201705031140434_addedPhoneNumberValidation6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705031157031_addedPhoneNumberValidation7.resx">
+      <DependentUpon>201705031157031_addedPhoneNumberValidation7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
+using System.Web.Mvc;
 using Transportsystem_GoogleMaps.Models;
 
 namespace Transportsystem_GoogleMaps.Controllers.Api
@@ -34,19 +36,22 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
         }
 
         // POST/Api/drivers
-        [HttpPost]
-        public Driver CreateDriver(Driver driver)
+        [System.Web.Http.HttpPost]
+        public IHttpActionResult CreateDriver(Driver driver)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
-
+            {
+                var errorResponse = Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                return BadRequest(errorResponse.Content.ReadAsStringAsync().Result);
+            }
+              
             _context.Drivers.Add(driver);
             _context.SaveChanges();
-            return driver;
+            return Ok();
         }
 
         // PUT/Api/drivers/1
-        [HttpPut]
+        [System.Web.Http.HttpPut]
         public void UpdateDriver(int id, Driver driver)
         {
             if (!ModelState.IsValid)
@@ -59,13 +64,13 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
 
             driverInDb.Name = driver.Name;
             driverInDb.PhoneNumber = driver.PhoneNumber;
-            driverInDb.DeliveryId = driver.DeliveryId;
+            //driverInDb.DeliveryId = driver.DeliveryId;
 
             _context.SaveChanges();
         }
 
         // DELETE/Api/drivers/1
-        [HttpDelete]
+        [System.Web.Http.HttpDelete]
         public void DeleteDriver(int id)
         {
             if (!ModelState.IsValid)

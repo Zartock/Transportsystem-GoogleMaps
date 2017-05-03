@@ -16,8 +16,9 @@ namespace Transportsystem_GoogleMaps.Models
         [Required]
         public DateTime Date { get; set; }
 
-        public Delivery(int numOfDrivers)
+        public Delivery(int numOfDrivers, List<Package> packages)
         {
+            this.Packages = new LinkedList<Package>(packages);
             this.numOfDrivers = numOfDrivers;
         }
         public LinkedList<Package> Packages { get; set; }
@@ -27,15 +28,15 @@ namespace Transportsystem_GoogleMaps.Models
                 Packages.AddLast(p);
             }
 
-            public double CalculateRouteCost(LinkedList<Package> route)
-            {
-                double totalCost = 0;
-                for (int i = 0; i < route.Count - 1; i++)
-                {
-                    totalCost += GetDistanceLatLon(route.ElementAt(i), route.ElementAt(i + 1));
-                }
-                return totalCost;
-            }
+            //public double CalculateRouteCost(LinkedList<Package> route)
+            //{
+            //    double totalCost = 0;
+            //    for (int i = 0; i < route.Count - 1; i++)
+            //    {
+            //        totalCost += GetDistanceLatLon(route.ElementAt(i), route.ElementAt(i + 1));
+            //    }
+            //    return totalCost;
+            //}
 
             public double GetDistanceLatLon(Package p1, Package p2)
             {

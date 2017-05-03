@@ -25,6 +25,7 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
             return _context.DeliveryRoutes.ToList();
         }
 
+   
         public IEnumerable<Package> GetDeliveryRoute(int id)
         {
             List<DeliveryRoute> filteredList = new List<DeliveryRoute>();
@@ -46,9 +47,36 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
 
 
         [HttpPost]
-        public void AddDeliveryRoute(DeliveryRoute deliveryRoute)
+        public void AddDeliveryRoutes(List<DeliveryRoute> deliveryRoutes)
         {
-            _context.DeliveryRoutes.Add(deliveryRoute);
+
+            //TODO Fixa så att clustering endast görs på klient och hindra dubletter av förare när deliveryroutes sparas
+
+            var packages = _context.Packages.ToList();
+            var driverList = _context.Drivers.ToList();
+            int drivers = driverList.Count();
+
+            Delivery d = new Delivery(drivers, packages);
+
+            LinkedList<PackageCluster> clusters = d.clustering();
+            List<DeliveryRoute> routes = new List<DeliveryRoute>();
+
+            for (int i = 0; i < clusters.Count; i++)
+            {
+                List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
+                for (int j = 0; j < packageList.Count; j++)
+                {
+                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
+                }
+            }
+
+            List<Driver> existList = new List<Driver>();
+
+            for (int i = 0; i < routes.Count; i++)
+            {
+                _context.Packages.Attach(routes[i].Package);
+                _context.DeliveryRoutes.Add(routes[i]);
+            }
             _context.SaveChanges();
         }
         [HttpDelete]

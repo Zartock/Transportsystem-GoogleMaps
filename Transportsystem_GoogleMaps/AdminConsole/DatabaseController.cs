@@ -184,7 +184,7 @@ namespace AdminConsole
             }
             _context.SaveChanges();
 
-            Delivery d = new Delivery(drivers);
+            Delivery d = new Delivery(drivers, (List<Package>)packages);
             d.Packages = new LinkedList<Package>(packages);
 
 

@@ -11,11 +11,12 @@ namespace Transportsystem_GoogleMaps.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Content can only be 50 letters long")]
+        [RegularExpression("(^[\\w]+[\\w]+\\s[\\w]+[\\w])|(^[\\w]+[\\w])", ErrorMessage = "Please write with only letters")]
         public string Content { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(50, ErrorMessage = "Destination can only be 50 letters long")]
         public string Destination { get; set; }
 
         public byte? Priority { get; set; }
@@ -34,9 +35,6 @@ namespace Transportsystem_GoogleMaps.Models
             Priority = package.Priority;
             Latitude = package.Latitude;
             Longitude = package.Longitude;
-            
-
         }
-
     }
 }

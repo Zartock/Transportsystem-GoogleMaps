@@ -4,8 +4,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
+using System.Web.Http.Results;
 using AutoMapper;
 using Newtonsoft.Json.Linq;
 using Transportsystem_GoogleMaps.Dtos;
@@ -25,11 +27,9 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
         // GET/Api/packages
         public IEnumerable<PackageDto> GetPackages()
         {
-
             return _context.Packages
                 .ToList()
                 .Select(Mapper.Map<Package, PackageDto>);
-
         }
 
 
@@ -47,10 +47,12 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
         public IHttpActionResult CreatePackage(PackageDto packageDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+            {
+                return BadRequest(ModelState.Values.ToString());
+            }
+              
 
             var package = Mapper.Map<PackageDto, Package>(packageDto);
-
 
             try
             {
@@ -65,12 +67,13 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
                     (double) data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lng");
                 _context.Packages.Add(package);
                 _context.SaveChanges();
+
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.StackTrace + "\n  Address does not exist");
             }
-
+           
             packageDto.Id = package.Id;
             return Created(new Uri(Request.RequestUri + "/" + package.Id), packageDto);
         }
@@ -80,7 +83,9 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
         public IHttpActionResult UpdatePackage(int id, PackageDto packageDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+            {
+                return BadRequest(ModelState.Values.ToString());
+            }
 
             var packageInDb = _context.Packages.SingleOrDefault(p => p.Id == id);
 

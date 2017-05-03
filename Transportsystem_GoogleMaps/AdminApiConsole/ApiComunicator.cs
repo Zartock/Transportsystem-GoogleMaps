@@ -58,6 +58,7 @@ namespace AdminApiConsole
             return list;
         }
 
+  
         public Package GetPackageById(int id)
         {
             WebRequest request = WebRequest.Create(serverURL + "/Api/Package/" + id);
@@ -91,9 +92,45 @@ namespace AdminApiConsole
             dataStream.Write(byteArray, 0, byteArray.Length);
             // Close the Stream object.  
             dataStream.Close();
-            WebResponse response = request.GetResponse();
+            try
+            {
+                WebResponse response = request.GetResponse();
+            }
+            catch (WebException e)
+            {
+                DisplayHandler.printError(e);
+            }
+        }
 
+        public void AddDeliveryRoutes(List<DeliveryRoute> deliveryRoutes)
+        {
+            var drivers = GetDrivers();
+            var packages = GetPackages();
 
+            // Create a request using a URL that can receive a post.   
+            WebRequest request = WebRequest.Create(serverURL + "/Api/DeliveryRoute");
+            // Set the Method property of the request to POST.  
+            request.Method = "POST";
+            string postData = JsonConvert.SerializeObject(deliveryRoutes);
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            // Set the ContentType property of the WebRequest.  
+            request.ContentType = "application/json";
+            // Set the ContentLength property of the WebRequest.  
+            request.ContentLength = byteArray.Length;
+            // Get the request stream.  
+            Stream dataStream = request.GetRequestStream();
+            // Write the data to the request stream.  
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            // Close the Stream object.  
+            dataStream.Close();
+            try
+            {
+                WebResponse response = request.GetResponse();
+            }
+            catch (WebException e)
+            {
+                DisplayHandler.printError(e);
+            }
         }
 
         public void SavePackage(Package p)
@@ -114,13 +151,21 @@ namespace AdminApiConsole
             dataStream.Write(byteArray, 0, byteArray.Length);
             // Close the Stream object.  
             dataStream.Close();
-            WebResponse response = request.GetResponse();
-
+            try
+            {
+                WebResponse response = request.GetResponse();
+            }
+            catch (WebException e)
+            {
+                DisplayHandler.printError(e);
+            }
         }
+
+  
 
         public void DeleteDriver(int id)
         {
-            WebRequest request = WebRequest.Create(serverURL + "/Api/Driver/"+id);
+            WebRequest request = WebRequest.Create(serverURL + "/Api/Driver/" + id);
             // Set the Method property of the request to POST.  
             request.Method = "DELETE";
             WebResponse response = request.GetResponse();
@@ -159,7 +204,14 @@ namespace AdminApiConsole
             dataStream.Write(byteArray, 0, byteArray.Length);
             // Close the Stream object.  
             dataStream.Close();
-            WebResponse response = request.GetResponse();
+            try
+            {
+                WebResponse response = request.GetResponse();
+            }
+            catch (WebException e)
+            {
+                DisplayHandler.printError(e);
+            }
         }
         public void UpdateDriver(int id, Driver d)
         {
@@ -177,9 +229,14 @@ namespace AdminApiConsole
             dataStream.Write(byteArray, 0, byteArray.Length);
             // Close the Stream object.  
             dataStream.Close();
-            WebResponse response = request.GetResponse();
+            try
+            {
+                WebResponse response = request.GetResponse();
+            }
+            catch (WebException e)
+            {
+                DisplayHandler.printError(e);
+            }
         }
-
-
     }
 }

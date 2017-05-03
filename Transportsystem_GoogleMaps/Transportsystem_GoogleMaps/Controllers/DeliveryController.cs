@@ -27,32 +27,15 @@ namespace Transportsystem_GoogleMaps.Controllers
             _context.Dispose();
         }
        
-
-   
         // GET: Delivery
         public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult Deliveries()
         {
             var packages = _context.Packages.ToList();
             int drivers = _context.Drivers.Count();
 
-            List<Package> packagesWithData = new List<Package>();
-            foreach (var package in packages)
-            {
-                var json = new WebClient().DownloadString("https://maps.googleapis.com/maps/api/geocode/json?address=" + package.Destination + "&key=AIzaSyBMVIteB6a_vtVSunhpk56yZWeTSGN2CkM");
-                var data = JObject.Parse(json);
-                package.Latitude = (double)data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lat");
-                package.Longitude = (double)data["results"][0].SelectToken("geometry").SelectToken("location").SelectToken("lng");
-                packagesWithData.Add(package);
-            }           
-            _context.SaveChanges();
-
-            Delivery d = new Delivery(drivers);
-            d.Packages = new LinkedList<Package>(packages);
-            d.TotalDistance = d.CalculateRouteCost(d.Packages);         
+            Delivery d = new Delivery(drivers, packages);
+            // d.Packages = new LinkedList<Package>(packages);
+            //d.TotalDistance = d.CalculateRouteCost(d.Packages);         
 
             DeliveryViewModel viewModel = new DeliveryViewModel
             {
@@ -61,13 +44,7 @@ namespace Transportsystem_GoogleMaps.Controllers
 
             return View(viewModel);
         }
-
-        //public ActionResult DriverDelivery(int id)
-        //{
-        //    var driver = _context.Drivers.SingleOrDefault(d => d.Id == id);
-
-        //}
-
+ 
         public ActionResult New()
         {
             return View();

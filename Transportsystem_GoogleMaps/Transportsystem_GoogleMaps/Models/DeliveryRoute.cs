@@ -12,5 +12,15 @@ namespace Transportsystem_GoogleMaps.Models
         public Driver Driver { get; set; }
 
         public Package Package { get; set; }
+
+        public DeliveryRoute()
+        {
+          
+        }
+        public DeliveryRoute(Driver driver, Package package)
+        {
+            this.Driver = driver;
+            this.Package = package;
+        }
     }
 }
