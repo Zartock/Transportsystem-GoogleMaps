@@ -12,6 +12,8 @@ using AutoMapper;
 using Newtonsoft.Json.Linq;
 using Transportsystem_GoogleMaps.Dtos;
 using Transportsystem_GoogleMaps.Models;
+using System.Data.Entity.Validation;
+
 
 namespace Transportsystem_GoogleMaps.Controllers.Api
 {
@@ -51,7 +53,6 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
                 return BadRequest(ModelState.Values.ToString());
             }
               
-
             var package = Mapper.Map<PackageDto, Package>(packageDto);
 
             try
@@ -68,6 +69,10 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
                 _context.Packages.Add(package);
                 _context.SaveChanges();
 
+            }
+            catch (DbEntityValidationException e)
+            {
+                return BadRequest(e.StackTrace + "\n  Validation of content failed");
             }
             catch (Exception e)
             {

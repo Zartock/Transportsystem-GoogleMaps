@@ -18,6 +18,11 @@
         @Html.TextBoxFor(d => d.PhoneNumber, new { @class = "form-control" })
         @Html.ValidationMessageFor(d => d.PhoneNumber)
     </div>
+    <div class="form-group">
+        @Html.LabelFor(d => d.PersonalNumber)
+        @Html.TextBoxFor(d => d.PersonalNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(d => d.PersonalNumber)
+    </div>
     @Html.HiddenFor(d => d.Id)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>

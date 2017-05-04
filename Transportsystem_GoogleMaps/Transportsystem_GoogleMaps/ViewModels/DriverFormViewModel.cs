@@ -19,6 +19,9 @@ namespace Transportsystem_GoogleMaps.ViewModels
         [Required]
         public string PhoneNumber { get; set; }
 
+        [Required]
+        public string PersonalNumber { get; set; }
+
         public string Title
         {
             get { return Id != 0 ? "Edit Driver" : "New Driver"; }
@@ -34,6 +37,7 @@ namespace Transportsystem_GoogleMaps.ViewModels
             Id = driver.Id;
             Name = driver.Name;
             PhoneNumber = driver.PhoneNumber;
+            driver.PersonalNumber = PersonalNumber;
         }
     }
 }

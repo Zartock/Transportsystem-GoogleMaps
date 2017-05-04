@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Net;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Transportsystem_GoogleMaps.Models;
@@ -44,7 +46,36 @@ namespace Transportsystem_GoogleMaps.Controllers
 
             return View(viewModel);
         }
- 
+
+        // GET: Delivery/1
+        public ActionResult DriverDelivery()
+        {
+            List<Package> tempPackages = new List<Package>();
+            List<DeliveryRoute> allDestinations = new List<DeliveryRoute>();
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+            string s = currentUser.PersonalNumber;
+
+            try
+            {
+                var driver = _context.Drivers.SingleOrDefault(d => d.PersonalNumber == s);
+                var packages = _context.Packages.ToList();
+
+                allDestinations = _context.DeliveryRoutes.ToList().FindAll(d => d.Driver == driver); 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
+
+            foreach (var delivery in allDestinations)
+            {
+                tempPackages.Add(delivery.Package);
+            }
+
+            return View(tempPackages);
+        }
+
         public ActionResult New()
         {
             return View();

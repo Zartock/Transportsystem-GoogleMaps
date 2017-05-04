@@ -12,7 +12,7 @@ namespace Transportsystem_GoogleMaps.Models
 
         [Required]
         [StringLength(50, ErrorMessage = "Content can only be 50 letters long")]
-        [RegularExpression("(^[\\w]+[\\w]+\\s[\\w]+[\\w])|(^[\\w]+[\\w])", ErrorMessage = "Please write with only letters")]
+        [RegularExpression("(^[\\w\\d]+[\\w\\d]+(\\s[\\w\\d]+)*)", ErrorMessage = "Please write with only letters")]
         public string Content { get; set; }
 
         [Required]

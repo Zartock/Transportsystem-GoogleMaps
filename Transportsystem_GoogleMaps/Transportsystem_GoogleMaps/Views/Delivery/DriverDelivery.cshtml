@@ -1,5 +1,5 @@
 ﻿@using Transportsystem_GoogleMaps.Models
-@model Transportsystem_GoogleMaps.ViewModels.DeliveryViewModel
+@model List<Package>
 
 @{
     ViewBag.Title = "Deliveries";
@@ -13,31 +13,21 @@
 
 <body>
 <h2>Delivery</h2>
-<button class="btn btn-primary" onclick="previousDelivery()">PreviousDelivery</button>
-<button class="btn btn-primary" onclick="nextDelivery()">NextDelivery</button>
 <div id="map"></div>
 <p id="traveltime"></p>
-<div id="directions"></div>
-
 </body>
 
 <script>
     var travelTime = 0;
     var travelDistance = 0;
-    var selectedRoute = 0;
-    var i = 0;
     var model;
-    var wholeModel;
     var directionsService;
     var directionsDisplay;
 
     function initMap() {
-        console.log("Selected: " + selectedRoute);
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
-        model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(0).AssignedPackages)));
-
-        wholeModel = @Html.Raw(Json.Encode(Model.PackageClusters));
+        model = @Html.Raw(Json.Encode(new List<Package>(Model)));
 
         var center = { lat: 59.261897775, lng: 15.30572069518922 };
 
@@ -47,13 +37,6 @@
             center: center
         });
         directionsDisplay.setMap(map);
-
-        for (var j = 0; j < wholeModel.length; j++) {
-            new google.maps.Marker({
-            position: { lat: wholeModel[j].CentroidPackage.Latitude, lng: wholeModel[j].CentroidPackage.Longitude },
-            map: map
-        });
-        }
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
@@ -84,26 +67,9 @@
             });
     }
 
-    function showSteps(directionResult, markerArray, stepDisplay, map) {
-        // For each step, place a marker, and add the text to the marker's infowindow.
-        // Also attach the marker to an array so we can keep track of it and remove it
-        // when calculating new routes.
-        var myRoute = directionResult.routes[0].legs[0];
-        for (var i = 0; i < myRoute.steps.length; i++) {
-            //var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
-            //marker.setMap(map);
-            //marker.setPosition(myRoute.steps[i].start_location);
-            //attachInstructionText(
-            //    stepDisplay, marker, myRoute.steps[i].instructions, map);
-            document.getElementById('directions').innerHTML += '<br>' + myRoute.steps[i].instructions;
-        }
-    }
-
     function getTotalTime(result) {
-        console.log(result);
         travelTime = 0;
         var routeLegs = result.routes[0].legs;
-        console.log(routeLegs);
         for (var leg = 0; leg < routeLegs.length; leg++) {
             travelTime += routeLegs[leg].duration.value;
             travelDistance += routeLegs[leg].distance.value;
@@ -114,25 +80,6 @@
             ? document.getElementById('traveltime').innerHTML += Math.floor(travelTime / 3600) + "h " + Math.round((travelTime - 3600 * (Math.floor(travelTime / 3600))) / 60) + "min"
             : document.getElementById('traveltime').innerHTML += Math.round(travelTime / 60) + "min";
         document.getElementById('traveltime').innerHTML += "<br> Total travel distance: " + travelDistance.toFixed(2) + "km";
-    }
-
-    function nextDelivery() {
-        if (selectedRoute < @Model.PackageClusters.Count-1) {
-            selectedRoute++;
-            i = 0;
-            model = wholeModel[selectedRoute].AssignedPackages;
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
-        }
-    }
-
-
-    function previousDelivery() {
-        if (selectedRoute !== 0) {
-            selectedRoute--;
-            i = 0;
-            model = wholeModel[selectedRoute].AssignedPackages;
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
-        }
     }
 
 </script>

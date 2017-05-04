@@ -12,7 +12,7 @@ namespace Transportsystem_GoogleMaps.Controllers
         public ActionResult Index()
         {
             if (User.IsInRole("DriverRole"))
-                return RedirectToAction("Deliveries", "Delivery");
+                return RedirectToAction("DriverDelivery", "Delivery");
 
             return View();
         }

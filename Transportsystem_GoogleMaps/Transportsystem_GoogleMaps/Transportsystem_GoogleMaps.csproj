@@ -262,6 +262,26 @@
     <Compile Include="Migrations\201705031157031_addedPhoneNumberValidation7.Designer.cs">
       <DependentUpon>201705031157031_addedPhoneNumberValidation7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705040809358_addedPersonalNumberToDriverAndUserTable.cs" />
+    <Compile Include="Migrations\201705040809358_addedPersonalNumberToDriverAndUserTable.Designer.cs">
+      <DependentUpon>201705040809358_addedPersonalNumberToDriverAndUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705040832223_addedPersonalNumberToDriverAndUserTable1.cs" />
+    <Compile Include="Migrations\201705040832223_addedPersonalNumberToDriverAndUserTable1.Designer.cs">
+      <DependentUpon>201705040832223_addedPersonalNumberToDriverAndUserTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705040849174_addedPersonalNumberToDriverAndUserTable2.cs" />
+    <Compile Include="Migrations\201705040849174_addedPersonalNumberToDriverAndUserTable2.Designer.cs">
+      <DependentUpon>201705040849174_addedPersonalNumberToDriverAndUserTable2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705040856543_AddedPersonalNumberToApplicationUser.cs" />
+    <Compile Include="Migrations\201705040856543_AddedPersonalNumberToApplicationUser.Designer.cs">
+      <DependentUpon>201705040856543_AddedPersonalNumberToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705041158090_AddedPersonalNumberToApplicationUser1.cs" />
+    <Compile Include="Migrations\201705041158090_AddedPersonalNumberToApplicationUser1.Designer.cs">
+      <DependentUpon>201705041158090_AddedPersonalNumberToApplicationUser1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -569,6 +589,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705031157031_addedPhoneNumberValidation7.resx">
       <DependentUpon>201705031157031_addedPhoneNumberValidation7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705040809358_addedPersonalNumberToDriverAndUserTable.resx">
+      <DependentUpon>201705040809358_addedPersonalNumberToDriverAndUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705040832223_addedPersonalNumberToDriverAndUserTable1.resx">
+      <DependentUpon>201705040832223_addedPersonalNumberToDriverAndUserTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705040849174_addedPersonalNumberToDriverAndUserTable2.resx">
+      <DependentUpon>201705040849174_addedPersonalNumberToDriverAndUserTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705040856543_AddedPersonalNumberToApplicationUser.resx">
+      <DependentUpon>201705040856543_AddedPersonalNumberToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705041158090_AddedPersonalNumberToApplicationUser1.resx">
+      <DependentUpon>201705041158090_AddedPersonalNumberToApplicationUser1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
