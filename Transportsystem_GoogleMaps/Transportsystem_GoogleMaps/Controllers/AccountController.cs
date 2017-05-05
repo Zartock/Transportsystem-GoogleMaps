@@ -158,7 +158,7 @@ namespace Transportsystem_GoogleMaps.Controllers
                 var driver = _context.Drivers.SingleOrDefault(d => d.PersonalNumber == model.PersonalNumber);
                 if (driver == null)
                 {
-                    return View("Error");
+                    return Content("You dont have permission to register as a driver");
                 }
                
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PersonalNumber = model.PersonalNumber };

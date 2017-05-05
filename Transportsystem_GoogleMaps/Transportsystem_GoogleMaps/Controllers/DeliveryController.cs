@@ -32,17 +32,46 @@ namespace Transportsystem_GoogleMaps.Controllers
         // GET: Delivery
         public ActionResult Index()
         {
+            // deletes the routes
+            var routesToDelete = _context.DeliveryRoutes.ToList();
+            foreach (var route in routesToDelete)
+            {
+                _context.DeliveryRoutes.Remove(route);
+            }
+            _context.SaveChanges();
+
+            var driverList = _context.Drivers.ToList();
             var packages = _context.Packages.ToList();
             int drivers = _context.Drivers.Count();
 
             Delivery d = new Delivery(drivers, packages);
-            // d.Packages = new LinkedList<Package>(packages);
-            //d.TotalDistance = d.CalculateRouteCost(d.Packages);         
 
+            LinkedList<PackageCluster> clusters = d.clustering();
             DeliveryViewModel viewModel = new DeliveryViewModel
             {
-                PackageClusters = d.clustering()
+                PackageClusters = clusters
             };
+
+
+            // save routes to database
+            List<DeliveryRoute> routes = new List<DeliveryRoute>();
+
+            for (int i = 0; i < clusters.Count; i++)
+            {
+                List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
+                for (int j = 0; j < packageList.Count; j++)
+                {
+                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
+                }
+            }
+
+
+            for (int i = 0; i < routes.Count; i++)
+            {
+                _context.Packages.Attach(routes[i].Package);
+                _context.DeliveryRoutes.Add(routes[i]);
+            }
+            _context.SaveChanges();
 
             return View(viewModel);
         }
