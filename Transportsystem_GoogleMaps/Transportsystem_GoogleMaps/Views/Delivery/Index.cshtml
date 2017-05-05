@@ -13,8 +13,6 @@
 
 <body>
 <h2>Delivery</h2>
-<button onclick="previousDelivery()">PreviousDelivery</button>
-<button onclick="nextDelivery()">NextDelivery</button>
 <div id="map"></div>
 <p id="traveltime"></p>
 <div id="directions"></div>
@@ -30,7 +28,19 @@
         <li><a href="#"onclick="updateMap('BICYCLING')">Bicycle</a></li>
     </ul>
 </div>
-
+    
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Driver
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        @foreach (var driver in Model.Drivers)
+        {
+            <li><a href="#" onclick="getRoute(@driver.Id)">@driver.Name</a></li>
+        }
+    </ul>
+</div>
 </body>
 
 <script>
@@ -131,24 +141,21 @@
         document.getElementById('traveltime').innerHTML += "<br> Total travel distance: " + travelDistance.toFixed(2) + "km";
     }
 
-    function nextDelivery() {
-        if (selectedRoute < @Model.PackageClusters.Count-1) {
-            selectedRoute++;
-            i = 0;
-            model = wholeModel[selectedRoute].AssignedPackages;
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
-        }
+    function getRoute(id) {
+        
+        $.ajax({
+            url: '/api/DeliveryRoute/' + id,
+            type: 'GET',
+            contentType: 'application/json;',
+            success: function (data) {
+                model = data;
+                console.log(model);
+            }
+        });
+        updateMap(transportMethod);
     }
 
 
-    function previousDelivery() {
-        if (selectedRoute !== 0) {
-            selectedRoute--;
-            i = 0;
-            model = wholeModel[selectedRoute].AssignedPackages;
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
-        }
-    }
 
 </script>
 <script async defer

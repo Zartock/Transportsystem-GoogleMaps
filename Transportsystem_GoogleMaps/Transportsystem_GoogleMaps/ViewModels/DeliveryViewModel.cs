@@ -15,6 +15,8 @@ namespace Transportsystem_GoogleMaps.ViewModels
 
         [Required]
         public DateTime Date { get; set; }
+
+        public List<Driver> Drivers = new List<Driver>();
         
 
         public LinkedList<PackageCluster> PackageClusters { get; set; }

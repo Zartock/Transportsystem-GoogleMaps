@@ -104,33 +104,41 @@ namespace AdminApiConsole
 
         public void AddDeliveryRoutes(List<DeliveryRoute> deliveryRoutes)
         {
-            var drivers = GetDrivers();
-            var packages = GetPackages();
+            //var drivers = GetDrivers();
+            //var packages = GetPackages();
 
-            // Create a request using a URL that can receive a post.   
-            WebRequest request = WebRequest.Create(serverURL + "/Api/DeliveryRoute");
-            // Set the Method property of the request to POST.  
+            //// Create a request using a URL that can receive a post.   
+            //WebRequest request = WebRequest.Create(serverURL + "/Api/DeliveryRoute");
+            //// Set the Method property of the request to POST.  
+            //request.Method = "POST";
+            //string postData = JsonConvert.SerializeObject(deliveryRoutes);
+            //byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            //// Set the ContentType property of the WebRequest.  
+            //request.ContentType = "application/json";
+            //// Set the ContentLength property of the WebRequest.  
+            //request.ContentLength = byteArray.Length;
+            //// Get the request stream.  
+            //Stream dataStream = request.GetRequestStream();
+            //// Write the data to the request stream.  
+            //dataStream.Write(byteArray, 0, byteArray.Length);
+            //// Close the Stream object.  
+            //dataStream.Close();
+            //try
+            //{
+            //    WebResponse response = request.GetResponse();
+            //}
+            //catch (WebException e)
+            //{
+            //    DisplayHandler.printError(e);
+            //}
+
+            WebRequest request = WebRequest.Create(serverURL + "/Api/DeliveryRoute/");
             request.Method = "POST";
-            string postData = JsonConvert.SerializeObject(deliveryRoutes);
-            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-            // Set the ContentType property of the WebRequest.  
-            request.ContentType = "application/json";
-            // Set the ContentLength property of the WebRequest.  
-            request.ContentLength = byteArray.Length;
-            // Get the request stream.  
-            Stream dataStream = request.GetRequestStream();
-            // Write the data to the request stream.  
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            // Close the Stream object.  
-            dataStream.Close();
-            try
-            {
-                WebResponse response = request.GetResponse();
-            }
-            catch (WebException e)
-            {
-                DisplayHandler.printError(e);
-            }
+            request.ContentLength = 0;
+            WebResponse response = request.GetResponse();
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+            // Get the stream containing content returned by the server.  
+            Stream dataStream = response.GetResponseStream();
         }
 
         public void SavePackage(Package p)

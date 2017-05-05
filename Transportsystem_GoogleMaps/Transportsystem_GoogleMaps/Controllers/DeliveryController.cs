@@ -32,47 +32,69 @@ namespace Transportsystem_GoogleMaps.Controllers
         // GET: Delivery
         public ActionResult Index()
         {
-            // deletes the routes
-            var routesToDelete = _context.DeliveryRoutes.ToList();
-            foreach (var route in routesToDelete)
-            {
-                _context.DeliveryRoutes.Remove(route);
-            }
-            _context.SaveChanges();
+            //// deletes the routes
+            //var routesToDelete = _context.DeliveryRoutes.ToList();
+            //foreach (var route in routesToDelete)
+            //{
+            //    _context.DeliveryRoutes.Remove(route);
+            //}
+            //_context.SaveChanges();
 
+            //var driverList = _context.Drivers.ToList();
+            //var packages = _context.Packages.ToList();
+            //int drivers = _context.Drivers.Count();
+
+            //Delivery d = new Delivery(drivers, packages);
+
+            //LinkedList<PackageCluster> clusters = d.clustering();
+            //DeliveryViewModel viewModel = new DeliveryViewModel
+            //{
+            //    Drivers = driverList,
+            //    PackageClusters = clusters
+            //};
+
+
+            //// save routes to database
+            //List<DeliveryRoute> routes = new List<DeliveryRoute>();
+
+            //for (int i = 0; i < clusters.Count; i++)
+            //{
+            //    List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
+            //    for (int j = 0; j < packageList.Count; j++)
+            //    {
+            //        routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
+            //    }
+            //}
+
+            //for (int i = 0; i < routes.Count; i++)
+            //{
+            //    _context.Packages.Attach(routes[i].Package);
+            //    _context.DeliveryRoutes.Add(routes[i]);
+            //}
+            //_context.SaveChanges();
             var driverList = _context.Drivers.ToList();
-            var packages = _context.Packages.ToList();
-            int drivers = _context.Drivers.Count();
+            var packageList = _context.Packages.ToList();
+            var deliveryRouteList = _context.DeliveryRoutes.ToList();
+            
 
-            Delivery d = new Delivery(drivers, packages);
-
-            LinkedList<PackageCluster> clusters = d.clustering();
-            DeliveryViewModel viewModel = new DeliveryViewModel
+            NewDeliveryViewModel viewModel = new NewDeliveryViewModel
             {
-                PackageClusters = clusters
+                Drivers = driverList,
+                DeliveryRoutes = deliveryRouteList
             };
 
-
-            // save routes to database
-            List<DeliveryRoute> routes = new List<DeliveryRoute>();
-
-            for (int i = 0; i < clusters.Count; i++)
+            foreach (var driver in driverList)
             {
-                List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
-                for (int j = 0; j < packageList.Count; j++)
+                var tmp = deliveryRouteList.FindAll(d => d.Driver == driver);
+                List<Package> tmpPackageList = new List<Package>();
+                foreach (var deliveryRoute in tmp)
                 {
-                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
+                    tmpPackageList.Add(deliveryRoute.Package);
                 }
+                viewModel.TestDictionary.Add(driver.Name, tmpPackageList);
             }
 
-            for (int i = 0; i < routes.Count; i++)
-            {
-                _context.Packages.Attach(routes[i].Package);
-                _context.DeliveryRoutes.Add(routes[i]);
-            }
-            _context.SaveChanges();
-
-            return View(viewModel);
+            return View("NewIndex", viewModel);
         }
 
         // GET: Delivery/1
