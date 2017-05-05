@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -18,13 +19,15 @@ namespace Transportsystem_GoogleMaps.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        public ApplicationDbContext _context;
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
+            _context = new ApplicationDbContext();
             UserManager = userManager;
             SignInManager = signInManager;
         }
@@ -152,12 +155,18 @@ namespace Transportsystem_GoogleMaps.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PersonalNumber = model.PersonalNumber};
+                var driver = _context.Drivers.SingleOrDefault(d => d.PersonalNumber == model.PersonalNumber);
+                if (driver == null)
+                {
+                    return View("Error");
+                }
+               
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PersonalNumber = model.PersonalNumber };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await UserManager.AddToRoleAsync(user.Id, "DriverRole");
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);   
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
