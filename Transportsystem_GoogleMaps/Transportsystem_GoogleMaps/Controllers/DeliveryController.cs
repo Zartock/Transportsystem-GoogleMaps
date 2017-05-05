@@ -65,7 +65,6 @@ namespace Transportsystem_GoogleMaps.Controllers
                 }
             }
 
-
             for (int i = 0; i < routes.Count; i++)
             {
                 _context.Packages.Attach(routes[i].Package);

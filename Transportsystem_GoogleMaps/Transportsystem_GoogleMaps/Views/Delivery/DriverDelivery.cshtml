@@ -15,6 +15,18 @@
 <h2>Delivery</h2>
 <div id="map"></div>
 <p id="traveltime"></p>
+    
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Transport Method
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#" onclick="updateMap('DRIVING')">Driving</a></li>
+        <li><a href="#"onclick="updateMap('WALKING')">Walking</a></li>
+        <li><a href="#"onclick="updateMap('BICYCLING')">Bicycle</a></li>
+    </ul>
+</div>
 </body>
 
 <script>
@@ -23,6 +35,12 @@
     var model;
     var directionsService;
     var directionsDisplay;
+    var transportMethod = "DRIVING";
+
+    function updateMap(method) {
+        transportMethod = method;
+        initMap();
+    }
 
     function initMap() {
         directionsService = new google.maps.DirectionsService;
@@ -54,7 +72,7 @@
 
                 waypoints: wayPts,
                 optimizeWaypoints: true,
-                travelMode: 'DRIVING'
+                travelMode: transportMethod
             },
             function(response, status) {
                 if (status === 'OK') {
