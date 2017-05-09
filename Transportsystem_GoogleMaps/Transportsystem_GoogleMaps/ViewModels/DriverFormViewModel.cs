@@ -37,7 +37,7 @@ namespace Transportsystem_GoogleMaps.ViewModels
             Id = driver.Id;
             Name = driver.Name;
             PhoneNumber = driver.PhoneNumber;
-            driver.PersonalNumber = PersonalNumber;
+            PersonalNumber = driver.PersonalNumber;
         }
     }
 }

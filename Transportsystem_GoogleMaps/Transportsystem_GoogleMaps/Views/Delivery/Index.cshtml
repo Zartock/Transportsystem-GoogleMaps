@@ -14,14 +14,15 @@
 <body>
 <h2>Delivery</h2>
 
+<p id="errors"></p>
 <ul class="list-inline">
     <li>
         <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expande>
+            <button class="btn btn-default dropdown-toggle" type="button" id="transportDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expande>
                 Transport Method 
                 <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <ul class="dropdown-menu" aria-labelledby="transportDropDown">
                 <li><a href="#" onclick="updateMap('DRIVING')">Driving</a></li>
                 <li><a href="#"onclick="updateMap('WALKING')">Walking</a></li>
                 <li><a href="#"onclick="updateMap('BICYCLING')">Bicycle</a></li>
@@ -31,11 +32,11 @@
     <li>
         
         <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <button class="btn btn-default dropdown-toggle" type="button" id="driverDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Driver
                 <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <ul class="dropdown-menu" aria-labelledby="driverDropDown">
                 @foreach (var driver in Model.Drivers)
                 {
                     <li><a href="#" onclick="getRoute('@driver.Name')">@driver.Name</a></li>
@@ -99,21 +100,19 @@
 
         
         transportMethod = method;
-        document.getElementById('dropdownMenu1').innerHTML = transportMethod + ' <span class="caret"></span>';
+        document.getElementById('transportDropDown').innerHTML = transportMethod + ' <span class="caret"></span>';
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
 
     function initMap() {
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
-        wholeModel = @Html.Raw(Json.Encode(Model.TestDictionary));
+        wholeModel = @Html.Raw(Json.Encode(Model.DeliveryByDriver));
         console.log(wholeModel);
 
         
 
-        model = @Html.Raw(Json.Encode(new List<Package>(Model.TestDictionary[Model.Drivers[0].Name])));
-
-        @*wholeModel = @Html.Raw(Json.Encode(Model.PackageClusters));*@
+        model = @Html.Raw(Json.Encode(new List<Package>(Model.DeliveryByDriver[Model.Drivers[0].Name])));
 
         var center = { lat: 59.261897775, lng: 15.30572069518922 };
 
@@ -123,13 +122,6 @@
                 center: center
             });
         directionsDisplay.setMap(map);
-
-        //for (var j = 0; j < wholeModel.length; j++) {
-        //    new google.maps.Marker({
-        //        position: { lat: wholeModel[j].CentroidPackage.Latitude, lng: wholeModel[j].CentroidPackage.Longitude },
-        //        map: map
-        //    });
-        //}
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
@@ -153,26 +145,10 @@
                 if (status === 'OK') {
                     directionsDisplay.setDirections(response);
                     getTotalTime(response);
-                    //showSteps(response, markerArray, stepDisplay, map);
                 } else {
                     window.alert('Directions request failed due to ' + status);
                 }
             });
-    }
-
-    function showSteps(directionResult, markerArray, stepDisplay, map) {
-        // For each step, place a marker, and add the text to the marker's infowindow.
-        // Also attach the marker to an array so we can keep track of it and remove it
-        // when calculating new routes.
-        var myRoute = directionResult.routes[0].legs[0];
-        for (var i = 0; i < myRoute.steps.length; i++) {
-            //var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
-            //marker.setMap(map);
-            //marker.setPosition(myRoute.steps[i].start_location);
-            //attachInstructionText(
-            //    stepDisplay, marker, myRoute.steps[i].instructions, map);
-            document.getElementById('directions').innerHTML += '<br>' + myRoute.steps[i].instructions;
-        }
     }
 
     function getTotalTime(result) {
@@ -196,32 +172,34 @@
         var mydatetimepicker = $('#datetimepicker1').datetimepicker();
         var dtp = mydatetimepicker.data('DateTimePicker');
         //console.log(dtp.date());
-        var myDotNetDate = dtp.date().toISOString();
-        console.log(myDotNetDate);
+        var myDotNetDate = dtp.date().toISOString().toString().split('T')[0];
+        console.log("date: " + myDotNetDate);
+        console.log(JSON.stringify(myDotNetDate));
 
 
         // console.log(document.getElementById('datetimepicker').innerHTML);
        
         $.ajax({
-            url: '/api/DeliveryRoute/',
+            url: '/api/DeliveryRoute/' + myDotNetDate,
             type: 'POST',
             contentType: 'application/json;',
-            // data: "Fisk",
             success: function (data) {
-                //console.log('works');
-                location.reload();
+                location.reload();            
+            },
+            error: function (response) {
+                document.getElementById('errors').innerHTML = "<font color = #FF0000>" + response.responseJSON.message + "</font>";
             }
         });
     }
 
     function getRoute(name) {
-        console.log("Passed name: " + name);
+        //console.log("Passed name: " + name);
         var data = eval(wholeModel);
-        console.log(data["Viktor"]);
+        //console.log(data["Viktor"]);
         console.log(JSON.stringify(data[name]));
         model = data[name];
         $("#driverPackages").text(name + ":");
-        console.log(data[name][0]);
+        //console.log(data[name][0]);
         for (var i = 0; i < data[name].length; i++) {
             $("#driverPackages").append("<li>" +
                 "Content: " +
@@ -232,7 +210,7 @@
                 data[name][i].Status +
                 "</li>");
         }
-        document.getElementById('dropdownMenu2').innerHTML = name + ' <span class="caret"></span>';
+        document.getElementById('driverDropDown').innerHTML = name + ' <span class="caret"></span>';
         updateMap(transportMethod);
     }
        

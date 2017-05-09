@@ -102,7 +102,7 @@ namespace AdminApiConsole
             }
         }
 
-        public void AddDeliveryRoutes(List<DeliveryRoute> deliveryRoutes)
+        public void AddDeliveryRoutes(List<DeliveryRoute> deliveryRoutes, DateTime date)
         {
             //var drivers = GetDrivers();
             //var packages = GetPackages();
@@ -132,7 +132,7 @@ namespace AdminApiConsole
             //    DisplayHandler.printError(e);
             //}
 
-            WebRequest request = WebRequest.Create(serverURL + "/Api/DeliveryRoute/");
+            WebRequest request = WebRequest.Create(serverURL + "/Api/DeliveryRoute/" + date.ToString().Split(' ')[0]);
             request.Method = "POST";
             request.ContentLength = 0;
             WebResponse response = request.GetResponse();

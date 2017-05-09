@@ -16,6 +16,6 @@ namespace Transportsystem_GoogleMaps.ViewModels
 
         public List<DeliveryRoute> DeliveryRoutes { get; set; }
 
-        public Dictionary<string, List<Package>> TestDictionary = new Dictionary<string, List<Package>>();
+        public Dictionary<string, List<Package>> DeliveryByDriver = new Dictionary<string, List<Package>>();
     }
 }

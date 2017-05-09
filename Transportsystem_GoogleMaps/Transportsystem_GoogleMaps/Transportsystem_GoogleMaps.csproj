@@ -212,7 +212,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
-    <Compile Include="Dtos\DeliveryDto.cs" />
     <Compile Include="Dtos\DriverDto.cs" />
     <Compile Include="Dtos\PackageDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -286,6 +285,10 @@
     <Compile Include="Migrations\201705080657242_addedStatusToPackage.Designer.cs">
       <DependentUpon>201705080657242_addedStatusToPackage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705090953558_AddingDeliveryDateToDeliveryRoute.cs" />
+    <Compile Include="Migrations\201705090953558_AddingDeliveryDateToDeliveryRoute.Designer.cs">
+      <DependentUpon>201705090953558_AddingDeliveryDateToDeliveryRoute.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -298,7 +301,6 @@
     <Compile Include="Models\PackageCluster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\DeliveryViewModel.cs" />
     <Compile Include="ViewModels\DriverFormViewModel.cs" />
     <Compile Include="ViewModels\NewDeliveryViewModel.cs" />
     <Compile Include="ViewModels\PackageFormViewModel.cs" />
@@ -696,6 +698,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705080657242_addedStatusToPackage.resx">
       <DependentUpon>201705080657242_addedStatusToPackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705090953558_AddingDeliveryDateToDeliveryRoute.resx">
+      <DependentUpon>201705090953558_AddingDeliveryDateToDeliveryRoute.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

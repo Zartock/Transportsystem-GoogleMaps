@@ -71,6 +71,8 @@ namespace Transportsystem_GoogleMaps.Controllers
             {
                 var driverInDb = _context.Drivers.Single(d => d.Id == driver.Id);
                 driverInDb.Name = driver.Name;
+                driverInDb.PhoneNumber = driver.PhoneNumber;
+                driverInDb.PersonalNumber = driver.PersonalNumber;
             }
             _context.SaveChanges();
 

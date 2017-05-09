@@ -13,14 +13,17 @@ namespace Transportsystem_GoogleMaps.Models
 
         public Package Package { get; set; }
 
+        public DateTime DeliveryDate { get; set; }
+
         public DeliveryRoute()
         {
           
         }
-        public DeliveryRoute(Driver driver, Package package)
+        public DeliveryRoute(Driver driver, Package package, DateTime date)
         {
             this.Driver = driver;
             this.Package = package;
+            DeliveryDate = date;
         }
     }
 }

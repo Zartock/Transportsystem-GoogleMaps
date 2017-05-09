@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
+using System.Text.RegularExpressions;
 using System.Web.Http.Results;
 using AutoMapper;
 using Newtonsoft.Json.Linq;
@@ -75,46 +76,20 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
         //}
 
 
-        //[HttpPost]
-        //public void AddDeliveryRoutes(List<DeliveryRoute> deliveryRoutes)
-        //{
-
-        //    //TODO Fixa så att clustering endast görs på klient och hindra dubletter av förare när deliveryroutes sparas
-
-        //    var packages = _context.Packages.ToList();
-        //    var driverList = _context.Drivers.ToList();
-        //    int drivers = driverList.Count();
-
-        //    Delivery d = new Delivery(drivers, packages);
-
-        //    LinkedList<PackageCluster> clusters = d.clustering();
-        //    List<DeliveryRoute> routes = new List<DeliveryRoute>();
-
-        //    for (int i = 0; i < clusters.Count; i++)
-        //    {
-        //        List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
-        //        for (int j = 0; j < packageList.Count; j++)
-        //        {
-        //            routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
-        //        }
-        //    }
-
-        //    List<Driver> existList = new List<Driver>();
-
-        //    for (int i = 0; i < routes.Count; i++)
-        //    {
-        //        _context.Packages.Attach(routes[i].Package);
-        //        _context.DeliveryRoutes.Add(routes[i]);
-        //    }
-        //    _context.SaveChanges();
-        //}
+        
         // POST/Api/DeliveryRoute
         [HttpPost]
-        //[ActionName("Simple")]
-        // [FromBody] string date
-        public IHttpActionResult AddDeliveryRoutes()
+        public IHttpActionResult AddDeliveryRoutes(string id)
         {
             //TODO Fixa så att clustering endast görs på klient och hindra dubletter av förare när deliveryroutes sparas
+            DateTime date;
+            var rgx = new Regex(@"^\d{4}-\d{2}-\d{2}");
+            if (!rgx.IsMatch(id))
+                return BadRequest();
+            date = Convert.ToDateTime(id);
+            if (date - DateTime.Today <= TimeSpan.FromDays(0))
+                return BadRequest("date has already passed");
+
             var routesToDelete = _context.DeliveryRoutes.ToList();
             foreach (var route in routesToDelete)
             {
@@ -140,7 +115,7 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
                 List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
                 for (int j = 0; j < packageList.Count; j++)
                 {
-                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
+                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j), date));
                 }
             }
 

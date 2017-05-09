@@ -25,9 +25,5 @@ namespace Transportsystem_GoogleMaps.Models
          [RegularExpression("(^[12]\\d{7}[-]\\d{4}$)", ErrorMessage = "Invalid Personal number must be of form e.g 19550524-6788")]
        
         public string PersonalNumber { get; set; }
-
-        //public Delivery Delivery { get; set; }
-
-        //public int? DeliveryId { get; set; }
     }
 }

@@ -64,7 +64,7 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
 
             driverInDb.Name = driver.Name;
             driverInDb.PhoneNumber = driver.PhoneNumber;
-            //driverInDb.DeliveryId = driver.DeliveryId;
+            driverInDb.PersonalNumber = driver.PersonalNumber;
 
             _context.SaveChanges();
         }

@@ -1,0 +1,4 @@
+[0509/111807.401:ERROR:process_reader_win.cc(142)] SuspendThread: Åtkomst nekad. (0x5)
+[0509/111807.402:ERROR:exception_snapshot_win.cc(87)] thread ID 16568 not found in process
+[0509/111807.403:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed
+[0509/111807.403:ERROR:scoped_process_suspend.cc(38)] NtResumeProcess: Ett försök gjordes att använda en befintlig process.  (0xc000010a)

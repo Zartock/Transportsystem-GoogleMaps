@@ -28,16 +28,6 @@ namespace Transportsystem_GoogleMaps.Models
                 Packages.AddLast(p);
             }
 
-            //public double CalculateRouteCost(LinkedList<Package> route)
-            //{
-            //    double totalCost = 0;
-            //    for (int i = 0; i < route.Count - 1; i++)
-            //    {
-            //        totalCost += GetDistanceLatLon(route.ElementAt(i), route.ElementAt(i + 1));
-            //    }
-            //    return totalCost;
-            //}
-
             public double GetDistanceLatLon(Package p1, Package p2)
             {
                 var radius = 6371; //radius of the earth in km

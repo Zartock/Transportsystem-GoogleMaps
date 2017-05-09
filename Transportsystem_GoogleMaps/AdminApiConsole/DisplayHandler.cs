@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +43,8 @@ namespace AdminApiConsole
                         ViewMenu();
                         break;
                     case "3":
-                        Clustering();
+                        DateSelect();
+                        //Clustering();
                         break;
                     case "4":
                         GetRouteSelection();
@@ -55,6 +57,29 @@ namespace AdminApiConsole
                         break;
                 }
             }
+        }
+
+        public void DateSelect()
+        {
+            Console.Clear();
+            Console.Write("Select Date {YYYY-MM-DD}: ");
+            var input = Console.ReadLine();
+            var rgx = new Regex(@"^\d{4}-\d{2}-\d{2}");
+            if (rgx.IsMatch(input))
+            {
+                Console.WriteLine("matches");
+                if (Convert.ToDateTime(input) - DateTime.Today <= TimeSpan.FromDays(0))
+                    Console.WriteLine("Date already passed?");
+                else
+                {
+                    Console.WriteLine("Date has not passed yet");
+                    Clustering(Convert.ToDateTime(input));
+                }      
+            }
+            else
+                Console.WriteLine("does not match");
+            Console.WriteLine("Press any key to continue");
+            Console.Read();
         }
 
         public void CreationMenu()
@@ -139,6 +164,7 @@ namespace AdminApiConsole
                     Console.WriteLine("    ID: " + drivers.ElementAt(i - 1).Id);
                     Console.WriteLine("    Name: " + drivers.ElementAt(i - 1).Name);
                     Console.WriteLine("    Phone number: " + drivers.ElementAt(i - 1).PhoneNumber);
+                    Console.WriteLine("    Social security number: " + drivers.ElementAt(i - 1).PersonalNumber);
                     Console.WriteLine("------------------------------");
                 }
                 Console.WriteLine("");
@@ -236,6 +262,8 @@ namespace AdminApiConsole
             d.Name = Console.ReadLine();
             Console.Write("Phone: ");
             d.PhoneNumber = Console.ReadLine();
+            Console.Write("Social Security Number: ");
+            d.PersonalNumber = Console.ReadLine();
             _api.SaveDriver(d);
         }
 
@@ -264,12 +292,16 @@ namespace AdminApiConsole
             Console.WriteLine("-------------------------");
             Console.Write("Previous Name: "); Console.ResetColor(); Console.Write(driverInDb.Name + "\n"); Console.ForegroundColor = _color;
             Console.Write("Previous Phone: "); Console.ResetColor(); Console.Write(driverInDb.PhoneNumber + "\n"); Console.ForegroundColor = _color;
+            Console.Write("Previous SSN: "); Console.ResetColor(); Console.Write(driverInDb.PersonalNumber + "\n"); Console.ForegroundColor = _color;
             Console.WriteLine("");
             Console.Write("New name: "); Console.ResetColor();
             driverInDb.Name = Console.ReadLine();
             Console.ForegroundColor = _color;
             Console.Write("New phone: "); Console.ResetColor();
             driverInDb.PhoneNumber = Console.ReadLine();
+            Console.ForegroundColor = _color;
+            Console.Write("New Social Security Number: "); Console.ResetColor();
+            driverInDb.PersonalNumber = Console.ReadLine();
             _api.UpdateDriver(id, driverInDb);
         }
 
@@ -292,7 +324,7 @@ namespace AdminApiConsole
         }
 
 
-        public void Clustering()
+        public void Clustering(DateTime date)
         {
             _api.DeleteDeliveryRoutes();
             var packages = _api.GetPackages();
@@ -309,10 +341,10 @@ namespace AdminApiConsole
                 List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
                 for (int j = 0; j < packageList.Count; j++)
                 {
-                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
+                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j), date));
                 }
             }
-            _api.AddDeliveryRoutes(routes);
+            _api.AddDeliveryRoutes(routes, date);
         }
 
         public int GetIdFromCommand(string command)

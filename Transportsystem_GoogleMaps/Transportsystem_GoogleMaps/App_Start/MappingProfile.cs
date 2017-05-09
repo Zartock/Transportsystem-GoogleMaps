@@ -14,14 +14,11 @@ namespace Transportsystem_GoogleMaps.App_Start
         {
             Mapper.CreateMap<Package, PackageDto>();
             Mapper.CreateMap<Driver, DriverDto>();
-            Mapper.CreateMap<Delivery, DeliveryDto>();
-
 
             Mapper.CreateMap<PackageDto, Package>()
                 .ForMember(p => p.Id, opt => opt.Ignore());
 
             Mapper.CreateMap<DriverDto, Driver>();
-            Mapper.CreateMap<DeliveryDto, Delivery>();
         }
     }
 }
