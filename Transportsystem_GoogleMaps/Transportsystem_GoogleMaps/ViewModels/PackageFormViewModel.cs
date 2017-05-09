@@ -17,6 +17,8 @@ namespace Transportsystem_GoogleMaps.ViewModels
         [Required]
         public string Destination { get; set; }
 
+        public string Status { get; set; }
+
         public string Title
         {
             get { return Id != 0 ? "Edit Package" : "New Package"; }
@@ -25,6 +27,7 @@ namespace Transportsystem_GoogleMaps.ViewModels
         public PackageFormViewModel()
         {
             Id = 0;
+            Status = "Undelivered";
         }
 
         public PackageFormViewModel(Package package)
@@ -32,6 +35,7 @@ namespace Transportsystem_GoogleMaps.ViewModels
             Id = package.Id;
             Content = package.Content;
             Destination = package.Destination;
+            Status = "Undelivered";
         }
 
     }

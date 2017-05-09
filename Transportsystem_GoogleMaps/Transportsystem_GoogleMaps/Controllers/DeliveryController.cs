@@ -94,7 +94,7 @@ namespace Transportsystem_GoogleMaps.Controllers
                 viewModel.TestDictionary.Add(driver.Name, tmpPackageList);
             }
 
-            return View("NewIndex", viewModel);
+            return View("Index", viewModel);
         }
 
         // GET: Delivery/1

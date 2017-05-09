@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
+using System.Web.Configuration;
 using System.Web.Http;
+using System.Web.Http.Results;
+using AutoMapper;
+using Newtonsoft.Json.Linq;
+using Transportsystem_GoogleMaps.Dtos;
 using Transportsystem_GoogleMaps.Models;
+using System.Data.Entity.Validation;
 
 namespace Transportsystem_GoogleMaps.Controllers.Api
 {
@@ -25,7 +33,7 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
             return _context.DeliveryRoutes.ToList();
         }
 
-   
+        [HttpGet]
         public IEnumerable<Package> GetDeliveryRoute(int id)
         {
             List<DeliveryRoute> filteredList = new List<DeliveryRoute>();
@@ -44,6 +52,27 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
             }
             return tmp;
         }
+
+
+        //public void changePackageStatus(int id)
+        //{
+        //    Package package = _context.Packages.SingleOrDefault(p => p.Id == id);
+        //    List<DeliveryRoute> filteredList = new List<DeliveryRoute>();
+        //    List<Package> tmp = new List<Package>();
+        //    Driver driver = _context.Drivers.SingleOrDefault(d => d.Id == id);
+        //    if (driver != null)
+        //    {
+        //        var packages = _context.Packages.ToList();
+        //        var firstList = _context.DeliveryRoutes.ToList();
+        //        filteredList = firstList.FindAll(d => d.Driver == driver);
+
+        //        foreach (var listItem in filteredList)
+        //        {
+        //            tmp.Add(listItem.Package);
+        //        }
+        //    }
+        //    return tmp;
+        //}
 
 
         //[HttpPost]
@@ -79,14 +108,25 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
         //    }
         //    _context.SaveChanges();
         //}
-
+        // POST/Api/DeliveryRoute
         [HttpPost]
+        //[ActionName("Simple")]
+        // [FromBody] string date
         public IHttpActionResult AddDeliveryRoutes()
         {
-
             //TODO Fixa så att clustering endast görs på klient och hindra dubletter av förare när deliveryroutes sparas
+            var routesToDelete = _context.DeliveryRoutes.ToList();
+            foreach (var route in routesToDelete)
+            {
+                _context.DeliveryRoutes.Remove(route);
+            }
+            _context.SaveChanges();
+
 
             var packages = _context.Packages.ToList();
+            // only include packages with status Undelivered
+            packages.RemoveAll(p => p.Status == "Delivered");
+           
             var driverList = _context.Drivers.ToList();
             int drivers = driverList.Count();
 
@@ -103,7 +143,6 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
                     routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
                 }
             }
-
 
             for (int i = 0; i < routes.Count; i++)
             {

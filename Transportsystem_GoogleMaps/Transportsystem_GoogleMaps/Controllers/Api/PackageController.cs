@@ -83,6 +83,17 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
             return Created(new Uri(Request.RequestUri + "/" + package.Id), packageDto);
         }
 
+
+        // POST/Api/packages
+        [HttpPost]
+        public void ChangeStatus(int id)
+        {
+            var packageInDb = _context.Packages.SingleOrDefault(p => p.Id == id);
+            packageInDb.Status = "Delivered";
+            _context.SaveChanges();
+        }
+
+
         // PUT/Api/packages/1
         [HttpPut]
         public IHttpActionResult UpdatePackage(int id, PackageDto packageDto)
@@ -102,6 +113,8 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
 
             return Ok();
         }
+
+
 
         // DELETE/Api/packages/1
         [HttpDelete]

@@ -1,4 +1,5 @@
-﻿@model Transportsystem_GoogleMaps.ViewModels.PackageFormViewModel
+﻿@using Transportsystem_GoogleMaps.Models
+@model Transportsystem_GoogleMaps.ViewModels.PackageFormViewModel
 @{
     ViewBag.Title = "PackageForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,41 +21,66 @@
         @Html.ValidationMessageFor(p => p.Destination)
         @Html.ValidationMessage("error_msg")
     </div>
-    @Html.HiddenFor(p => p.Id)
-    @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Save</button>
-  
-}
 
-@*<button onclick="savePackage()">Log</button>*@
+    <div class="form-group">
+        @{
+            var selectList = new SelectList(
+                new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Delivered", Value = "Delivered"},
+                    new SelectListItem {Text = "Undelivered", Value = "Undelivered"},
+                }, "Value", "Text");
 
-<script>
-    function savePackage() {
+            @Html.LabelFor(p => p.Status)
+            @Html.DropDownListFor(p => p.Status,
+                @selectList
+                )
+        }
 
-        var content = document.getElementById("Content").value;
-        var destination = document.getElementById("Destination").value;
+    </div>
+        @Html.HiddenFor(p => p.Id)
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Save</button>
+
+        }
+
+        @*<script>*@
+
+            @*function changeDeliveryType(type) {
+                p.status = type;
+            }
+
+        </script>*@
+
+        @*<button onclick="savePackage()">Log</button>*@
 
 
-        console.log(content + "        " + destination);
+        @*//  function savePackage() {
 
-    //    $.ajax({
-    //        url: '/api/Package',
-    //        type: 'POST',
-    //        dataType: 'json',
-    //        contentType: 'application/json; charset=utf-8',
-    //        data: JSON.stringify(Login),
-    //        success: function (data) {
-    //            alert("Saved successfully");
-    //        }
-    //    });
-    //}
- 
-@*</script>*@
+               // var content = document.getElementById("Content").value;
+               // var destination = document.getElementById("Destination").value;
 
-@section scripts
+
+              //  console.log(content + "        " + destination);
+
+            //    $.ajax({
+            //        url: '/api/Package',
+            //        type: 'POST',
+            //        dataType: 'json',
+            //        contentType: 'application/json; charset=utf-8',
+            //        data: JSON.stringify(Login),
+            //        success: function (data) {
+            //            alert("Saved successfully");
+            //        }
+            //    });
+            //}*@
+
+        @*</script>*@
+
+        @section scripts
 {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+            @Scripts.Render("~/bundles/jqueryval")
+        }
 
 
 

@@ -96,6 +96,10 @@ C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\bin\Debug\System.Web.WebPages.xml
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\obj\Debug\AdminApiConsole.csprojResolveAssemblyReference.cache
-C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\obj\Debug\AdminApiConsole.csproj.AdminApiConsole.exe.config
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\obj\Debug\AdminApiConsole.exe
 C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\obj\Debug\AdminApiConsole.pdb
+C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\bin\Debug\WebGrease.dll
+C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\bin\Debug\Antlr3.Runtime.dll
+C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+C:\Exjobb\Transportsystem-GoogleMaps\Transportsystem_GoogleMaps\AdminApiConsole\bin\Debug\Antlr3.Runtime.pdb

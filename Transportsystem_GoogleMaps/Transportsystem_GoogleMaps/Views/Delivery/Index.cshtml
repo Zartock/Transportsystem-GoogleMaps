@@ -1,5 +1,5 @@
 ﻿@using Transportsystem_GoogleMaps.Models
-@model Transportsystem_GoogleMaps.ViewModels.DeliveryViewModel
+@model Transportsystem_GoogleMaps.ViewModels.NewDeliveryViewModel
 
 @{
     ViewBag.Title = "Deliveries";
@@ -13,34 +13,74 @@
 
 <body>
 <h2>Delivery</h2>
+
+<ul class="list-inline">
+    <li>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expande>
+                Transport Method 
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#" onclick="updateMap('DRIVING')">Driving</a></li>
+                <li><a href="#"onclick="updateMap('WALKING')">Walking</a></li>
+                <li><a href="#"onclick="updateMap('BICYCLING')">Bicycle</a></li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Driver
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                @foreach (var driver in Model.Drivers)
+                {
+                    <li><a href="#" onclick="getRoute('@driver.Name')">@driver.Name</a></li>
+                }
+            </ul>
+        </div>
+    </li>
+
+    <li><button id="cluster" onclick="cluster()">Generate route</button></li>
+    
+    <li>
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group' id='datetimepicker1'>
+                            <input type='text'  class="form-control"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $('#datetimepicker1').datetimepicker({
+                            viewMode: 'days',
+                            format: 'YYYY/MM/DD'
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </li>
+</ul>
+
 <div id="map"></div>
 <p id="traveltime"></p>
 <div id="directions"></div>
 
-<div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Transport Method
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="#" onclick="updateMap('DRIVING')">Driving</a></li>
-        <li><a href="#"onclick="updateMap('WALKING')">Walking</a></li>
-        <li><a href="#"onclick="updateMap('BICYCLING')">Bicycle</a></li>
-    </ul>
-</div>
+<div id="driverPackages"></div>
+
     
-<div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Driver
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        @foreach (var driver in Model.Drivers)
-        {
-            <li><a href="#" onclick="getRoute(@driver.Id)">@driver.Name</a></li>
-        }
-    </ul>
-</div>
+
+
 </body>
 
 <script>
@@ -53,34 +93,43 @@
     var directionsService;
     var directionsDisplay;
     var transportMethod = "DRIVING";
+    
 
     function updateMap(method) {
+
+        
         transportMethod = method;
-        initMap();
+        document.getElementById('dropdownMenu1').innerHTML = transportMethod + ' <span class="caret"></span>';
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
 
     function initMap() {
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
-        model = @Html.Raw(Json.Encode(new List<Package>(Model.PackageClusters.ElementAt(0).AssignedPackages)));
+        wholeModel = @Html.Raw(Json.Encode(Model.TestDictionary));
+        console.log(wholeModel);
 
-        wholeModel = @Html.Raw(Json.Encode(Model.PackageClusters));
+        
+
+        model = @Html.Raw(Json.Encode(new List<Package>(Model.TestDictionary[Model.Drivers[0].Name])));
+
+        @*wholeModel = @Html.Raw(Json.Encode(Model.PackageClusters));*@
 
         var center = { lat: 59.261897775, lng: 15.30572069518922 };
 
         var map = new google.maps.Map(document.getElementById('map'),
-        {
-            zoom: 7,
-            center: center
-        });
+            {
+                zoom: 7,
+                center: center
+            });
         directionsDisplay.setMap(map);
 
-        for (var j = 0; j < wholeModel.length; j++) {
-            new google.maps.Marker({
-            position: { lat: wholeModel[j].CentroidPackage.Latitude, lng: wholeModel[j].CentroidPackage.Longitude },
-            map: map
-        });
-        }
+        //for (var j = 0; j < wholeModel.length; j++) {
+        //    new google.maps.Marker({
+        //        position: { lat: wholeModel[j].CentroidPackage.Latitude, lng: wholeModel[j].CentroidPackage.Longitude },
+        //        map: map
+        //    });
+        //}
 
         calculateAndDisplayRoute(directionsService, directionsDisplay);
     }
@@ -133,7 +182,7 @@
             travelTime += routeLegs[leg].duration.value;
             travelDistance += routeLegs[leg].distance.value;
         }
-        travelDistance /= 1000; 
+        travelDistance /= 1000;
         document.getElementById('traveltime').innerHTML = "Total travel time: ";
         (travelTime / 3600 >= 1)
             ? document.getElementById('traveltime').innerHTML += Math.floor(travelTime / 3600) + "h " + Math.round((travelTime - 3600 * (Math.floor(travelTime / 3600))) / 60) + "min"
@@ -141,22 +190,52 @@
         document.getElementById('traveltime').innerHTML += "<br> Total travel distance: " + travelDistance.toFixed(2) + "km";
     }
 
-    function getRoute(id) {
+    function cluster() {
+
         
+        var mydatetimepicker = $('#datetimepicker1').datetimepicker();
+        var dtp = mydatetimepicker.data('DateTimePicker');
+        //console.log(dtp.date());
+        var myDotNetDate = dtp.date().toISOString();
+        console.log(myDotNetDate);
+
+
+        // console.log(document.getElementById('datetimepicker').innerHTML);
+       
         $.ajax({
-            url: '/api/DeliveryRoute/' + id,
-            type: 'GET',
+            url: '/api/DeliveryRoute/',
+            type: 'POST',
             contentType: 'application/json;',
+            // data: "Fisk",
             success: function (data) {
-                model = data;
-                console.log(model);
+                //console.log('works');
+                location.reload();
             }
         });
-        updateMap(transportMethod);
     }
 
-
-
+    function getRoute(name) {
+        console.log("Passed name: " + name);
+        var data = eval(wholeModel);
+        console.log(data["Viktor"]);
+        console.log(JSON.stringify(data[name]));
+        model = data[name];
+        $("#driverPackages").text(name + ":");
+        console.log(data[name][0]);
+        for (var i = 0; i < data[name].length; i++) {
+            $("#driverPackages").append("<li>" +
+                "Content: " +
+                data[name][i].Content +
+                " Destination: " +
+                data[name][i].Destination +
+                " Status: " +
+                data[name][i].Status +
+                "</li>");
+        }
+        document.getElementById('dropdownMenu2').innerHTML = name + ' <span class="caret"></span>';
+        updateMap(transportMethod);
+    }
+       
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMVIteB6a_vtVSunhpk56yZWeTSGN2CkM&callback=initMap">

@@ -14,6 +14,7 @@ namespace Transportsystem_GoogleMaps.Dtos
 
         public string PhoneNumber { get; set; }
 
+
         public int? DeliveryId { get; set; }
     }
 }

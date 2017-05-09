@@ -95,6 +95,7 @@ namespace Transportsystem_GoogleMaps.Controllers
                 var packageInDb = _context.Packages.Single(p => p.Id == package.Id);
                 packageInDb.Content = package.Content;
                 packageInDb.Destination = package.Destination;
+                packageInDb.Status = package.Status;
             }
             _context.SaveChanges();
 

@@ -17,6 +17,7 @@ namespace Transportsystem_GoogleMaps.Dtos
 
         [Required]
         public string Destination { get; set; }
+        public string Status { get; set; }
 
         public byte? Priority { get; set; }
 

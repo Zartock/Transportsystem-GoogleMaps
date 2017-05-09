@@ -24,8 +24,11 @@ namespace Transportsystem_GoogleMaps.Models
         public double Latitude { get; set; } = 0;
         public double Longitude { get; set; } = 0;
 
+        public string Status { get; set; }
+
         public Package()
         {
+            Status = "Undelivered";
         }
 
         public Package(Package package)
@@ -35,6 +38,7 @@ namespace Transportsystem_GoogleMaps.Models
             Priority = package.Priority;
             Latitude = package.Latitude;
             Longitude = package.Longitude;
+            Status = "Undelivered";
         }
     }
 }

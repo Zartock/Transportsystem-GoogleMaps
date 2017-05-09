@@ -11,6 +11,8 @@ namespace Transportsystem_GoogleMaps
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/bootstrap.js",
+                        "~/Scripts/moment.js",
+                        "~/Scripts/bootstrap-datetimepicker.js",
                         "~/Scripts/bootbox.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/datatables/jquery.datatables.js",

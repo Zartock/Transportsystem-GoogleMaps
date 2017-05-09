@@ -13,21 +13,33 @@
 
 <body>
 <h2>Delivery</h2>
+
+<ul class="list-inline">
+    <li>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Transport Method
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#" onclick="updateMap('DRIVING')">Driving</a></li>
+                <li><a href="#"onclick="updateMap('WALKING')">Walking</a></li>
+                <li><a href="#"onclick="updateMap('BICYCLING')">Bicycle</a></li>
+            </ul>
+        </div>
+    </li>
+    <li><button id="Delivered" onclick="Delivered()">Package delivered</button></li>
+    <li>
+    </li>
+</ul>
+ 
 <div id="map"></div>
 <p id="traveltime"></p>
-    
-<div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Transport Method
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="#" onclick="updateMap('DRIVING')">Driving</a></li>
-        <li><a href="#"onclick="updateMap('WALKING')">Walking</a></li>
-        <li><a href="#"onclick="updateMap('BICYCLING')">Bicycle</a></li>
-    </ul>
-</div>
-    
+<p>Package:</p>
+<div id="packages"></div>
+
+
+<div id="driverPackages"></div>
 </body>
 
 <script>
@@ -36,7 +48,9 @@
     var model;
     var directionsService;
     var directionsDisplay;
+    var currentPackageToDeliver = 0;
     var transportMethod = "DRIVING";
+    var responseFromGoogleMaps;
 
     function updateMap(method) {
         transportMethod = method;
@@ -44,6 +58,8 @@
     }
 
     function initMap() {
+
+       
         directionsService = new google.maps.DirectionsService;
         directionsDisplay = new google.maps.DirectionsRenderer;
         model = @Html.Raw(Json.Encode(new List<Package>(Model)));
@@ -77,6 +93,22 @@
             },
             function(response, status) {
                 if (status === 'OK') {
+                    console.log(response.routes);
+                    console.log(model);
+                    responseFromGoogleMaps = response.routes;
+
+                    $("#driverPackages").text( 
+                        model[responseFromGoogleMaps[0].waypoint_order[0]].Content +
+                        " From: " +
+                        responseFromGoogleMaps[0].legs[0].start_address +
+                        " To: " +
+                        responseFromGoogleMaps[0].legs[0].end_address +
+
+                        " Status " + model[responseFromGoogleMaps[0].waypoint_order[0]].Status 
+                    );
+
+
+               
                     directionsDisplay.setDirections(response);
                     getTotalTime(response);
                     //showSteps(response, markerArray, stepDisplay, map);
@@ -86,9 +118,47 @@
             });
     }
 
+    function Delivered() {
+        //console.log(responseFromGoogleMaps.length);
+        //console.log(currentPackageToDeliver);
+        currentPackageToDeliver++;
+        if (currentPackageToDeliver <= (responseFromGoogleMaps[0].legs.length - 2)) {
+            console.log(responseFromGoogleMaps[0].legs);
+            //console.log(model);
+            console.log(currentPackageToDeliver);
+            console.log((responseFromGoogleMaps[0].legs.length - 1));
+            console.log('here');
+            $("#driverPackages").text( 
+                model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Content +
+                " From: " +
+                responseFromGoogleMaps[0].legs[currentPackageToDeliver].start_address +
+                " To: " +
+                responseFromGoogleMaps[0].legs[currentPackageToDeliver].end_address +
+
+                " Status " + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Status 
+            );
+            //console.log(responseFromGoogleMaps[0].legs.length - 1);
+            //console.log(currentPackageToDeliver);
+            //console.log("ID: " + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Id);
+            $.ajax({
+                url: '/api/Package/' + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver-1]].Id,
+                type: 'POST',
+                contentType: 'application/json;',
+                success: function (data) {
+                   
+                    console.log(model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver-1]].Content + 'has been delivered');
+                }
+            });
+
+            //console.log(model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Content + ' has been delivered');
+        }
+       
+    }
+
     function getTotalTime(result) {
         travelTime = 0;
         var routeLegs = result.routes[0].legs;
+       
         for (var leg = 0; leg < routeLegs.length; leg++) {
             travelTime += routeLegs[leg].duration.value;
             travelDistance += routeLegs[leg].distance.value;
