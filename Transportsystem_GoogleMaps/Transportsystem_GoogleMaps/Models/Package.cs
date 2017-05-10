@@ -26,6 +26,10 @@ namespace Transportsystem_GoogleMaps.Models
 
         public string Status { get; set; }
 
+        public DateTime? PlanedDeliveryDate { get; set; }
+
+        public DateTime? DateDelivered { get; set; }
+
         public Package()
         {
             Status = "Undelivered";

@@ -55,39 +55,19 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
         }
 
 
-        //public void changePackageStatus(int id)
-        //{
-        //    Package package = _context.Packages.SingleOrDefault(p => p.Id == id);
-        //    List<DeliveryRoute> filteredList = new List<DeliveryRoute>();
-        //    List<Package> tmp = new List<Package>();
-        //    Driver driver = _context.Drivers.SingleOrDefault(d => d.Id == id);
-        //    if (driver != null)
-        //    {
-        //        var packages = _context.Packages.ToList();
-        //        var firstList = _context.DeliveryRoutes.ToList();
-        //        filteredList = firstList.FindAll(d => d.Driver == driver);
-
-        //        foreach (var listItem in filteredList)
-        //        {
-        //            tmp.Add(listItem.Package);
-        //        }
-        //    }
-        //    return tmp;
-        //}
-
-
         
         // POST/Api/DeliveryRoute
         [HttpPost]
-        public IHttpActionResult AddDeliveryRoutes(string id)
+        [Route("api/DeliveryRoute/{date}")]
+        public IHttpActionResult AddDeliveryRoutes(string date)
         {
             //TODO Fixa så att clustering endast görs på klient och hindra dubletter av förare när deliveryroutes sparas
-            DateTime date;
+            DateTime dt;
             var rgx = new Regex(@"^\d{4}-\d{2}-\d{2}");
-            if (!rgx.IsMatch(id))
+            if (!rgx.IsMatch(date))
                 return BadRequest();
-            date = Convert.ToDateTime(id);
-            if (date - DateTime.Today <= TimeSpan.FromDays(0))
+            dt = Convert.ToDateTime(date);
+            if (dt - DateTime.Today <= TimeSpan.FromDays(0))
                 return BadRequest("date has already passed");
 
             var routesToDelete = _context.DeliveryRoutes.ToList();
@@ -115,7 +95,12 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
                 List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
                 for (int j = 0; j < packageList.Count; j++)
                 {
-                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j), date));
+                    var idComp = packageList.ElementAt(j).Id;
+                    var packageInDb = _context.Packages.Single(p => p.Id == idComp);
+                    _context.SaveChanges();
+                    packageInDb.PlanedDeliveryDate = dt.Date;
+                    packageList.ElementAt(j).PlanedDeliveryDate = dt.Date;
+                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
                 }
             }
 
@@ -126,6 +111,13 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
             }
             _context.SaveChanges();
             return Ok();
+        }
+
+        [HttpPut]
+        public void UpdateDeliveredDate(int id)
+        {
+            
+
         }
 
 

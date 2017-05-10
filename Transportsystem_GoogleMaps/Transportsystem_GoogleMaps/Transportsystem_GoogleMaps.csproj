@@ -289,6 +289,14 @@
     <Compile Include="Migrations\201705090953558_AddingDeliveryDateToDeliveryRoute.Designer.cs">
       <DependentUpon>201705090953558_AddingDeliveryDateToDeliveryRoute.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705100916137_AddedDeliveredDate.cs" />
+    <Compile Include="Migrations\201705100916137_AddedDeliveredDate.Designer.cs">
+      <DependentUpon>201705100916137_AddedDeliveredDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705100929530_MovedDateAtributesToPackageModel.cs" />
+    <Compile Include="Migrations\201705100929530_MovedDateAtributesToPackageModel.Designer.cs">
+      <DependentUpon>201705100929530_MovedDateAtributesToPackageModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -701,6 +709,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705090953558_AddingDeliveryDateToDeliveryRoute.resx">
       <DependentUpon>201705090953558_AddingDeliveryDateToDeliveryRoute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705100916137_AddedDeliveredDate.resx">
+      <DependentUpon>201705100916137_AddedDeliveredDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705100929530_MovedDateAtributesToPackageModel.resx">
+      <DependentUpon>201705100929530_MovedDateAtributesToPackageModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

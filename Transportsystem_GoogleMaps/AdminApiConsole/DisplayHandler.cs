@@ -341,7 +341,7 @@ namespace AdminApiConsole
                 List<Package> packageList = new List<Package>(clusters.ElementAt(i).AssignedPackages);
                 for (int j = 0; j < packageList.Count; j++)
                 {
-                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j), date));
+                    routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
                 }
             }
             _api.AddDeliveryRoutes(routes, date);

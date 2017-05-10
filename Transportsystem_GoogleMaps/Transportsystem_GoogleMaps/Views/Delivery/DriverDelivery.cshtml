@@ -105,29 +105,25 @@
                         responseFromGoogleMaps[0].legs[0].end_address +
 
                         " Status " + model[responseFromGoogleMaps[0].waypoint_order[0]].Status 
-                    );
-
-
-               
+                    );      
                     directionsDisplay.setDirections(response);
                     getTotalTime(response);
-                    //showSteps(response, markerArray, stepDisplay, map);
-                } else {
+
+                }
+                else {
                     window.alert('Directions request failed due to ' + status);
                 }
             });
     }
 
     function Delivered() {
-        //console.log(responseFromGoogleMaps.length);
-        //console.log(currentPackageToDeliver);
         currentPackageToDeliver++;
         if (currentPackageToDeliver <= (responseFromGoogleMaps[0].legs.length - 2)) {
             console.log(responseFromGoogleMaps[0].legs);
-            //console.log(model);
             console.log(currentPackageToDeliver);
             console.log((responseFromGoogleMaps[0].legs.length - 1));
             console.log('here');
+            console.log("packageID = " + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver - 1]].Id);
             $("#driverPackages").text( 
                 model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Content +
                 " From: " +
@@ -137,9 +133,6 @@
 
                 " Status " + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Status 
             );
-            //console.log(responseFromGoogleMaps[0].legs.length - 1);
-            //console.log(currentPackageToDeliver);
-            //console.log("ID: " + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Id);
             $.ajax({
                 url: '/api/Package/' + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver-1]].Id,
                 type: 'POST',
@@ -149,8 +142,6 @@
                     console.log(model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver-1]].Content + 'has been delivered');
                 }
             });
-
-            //console.log(model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Content + ' has been delivered');
         }
        
     }

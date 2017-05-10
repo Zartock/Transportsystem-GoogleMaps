@@ -23,59 +23,37 @@ namespace Transportsystem_GoogleMaps.Models
         }
         public LinkedList<Package> Packages { get; set; }
 
-            public void AddPackageToDeliveryList(Package p)
-            {
-                Packages.AddLast(p);
-            }
-
-            public double GetDistanceLatLon(Package p1, Package p2)
-            {
-                var radius = 6371; //radius of the earth in km
-                double dLat = 0;
-                double dLon = 0;
-                double a = 0;
-                double c = 0;
-                double d = 0;
-                
-                dLat = Deg2Rad(p2.Latitude - p1.Latitude);
-                dLon = Deg2Rad(p2.Longitude - p1.Longitude);
-                a =
-                    Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-                    Math.Cos(Deg2Rad(p1.Latitude)) * Math.Cos(Deg2Rad(p2.Latitude)) *
-                    Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
-                c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-                d = radius * c;
-                
-                return d;
-            }
-
-            public double Deg2Rad(double deg)
-            {
-                return deg * (Math.PI / 180);
-            }
-
-
-        public Package FindMostDistantPackage(Package p, ref List<int> avNumbers)
+        public void AddPackageToDeliveryList(Package p)
         {
-            int packageIndex = -1;
-            double oldDistance = Double.NegativeInfinity;
-            int i = 0;
-            foreach (var package in Packages)
-            {
-                double newDistance = GetDistanceLatLon(package, p);
-                if (newDistance > oldDistance)
-                {
-                    if (avNumbers.Contains(i))
-                    {
-                        oldDistance = newDistance;
-                        packageIndex = i;
-                        avNumbers[i] = -1;
-                    }
-                }
-                i++;
-            }
-            return Packages.ElementAt(packageIndex);
+            Packages.AddLast(p);
         }
+
+        public double GetDistanceLatLon(Package p1, Package p2)
+        {
+            var radius = 6371; //radius of the earth in km
+            double dLat = 0;
+            double dLon = 0;
+            double a = 0;
+            double c = 0;
+            double d = 0;
+
+            dLat = Deg2Rad(p2.Latitude - p1.Latitude);
+            dLon = Deg2Rad(p2.Longitude - p1.Longitude);
+            a =
+                Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                Math.Cos(Deg2Rad(p1.Latitude)) * Math.Cos(Deg2Rad(p2.Latitude)) *
+                Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+            c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            d = radius * c;
+
+            return d;
+        }
+
+        public double Deg2Rad(double deg)
+        {
+            return deg * (Math.PI / 180);
+        }
+
 
         public void InitializeClusters(ref LinkedList<PackageCluster> clusterCentroids)
         {

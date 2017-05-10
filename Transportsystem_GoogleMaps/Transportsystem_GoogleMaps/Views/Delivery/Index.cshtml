@@ -76,18 +76,13 @@
 <div id="map"></div>
 <p id="traveltime"></p>
 <div id="directions"></div>
-
 <div id="driverPackages"></div>
-
-    
-
 
 </body>
 
 <script>
     var travelTime = 0;
     var travelDistance = 0;
-    var selectedRoute = 0;
     var i = 0;
     var model;
     var wholeModel;
@@ -171,13 +166,9 @@
         
         var mydatetimepicker = $('#datetimepicker1').datetimepicker();
         var dtp = mydatetimepicker.data('DateTimePicker');
-        //console.log(dtp.date());
         var myDotNetDate = dtp.date().toISOString().toString().split('T')[0];
         console.log("date: " + myDotNetDate);
         console.log(JSON.stringify(myDotNetDate));
-
-
-        // console.log(document.getElementById('datetimepicker').innerHTML);
        
         $.ajax({
             url: '/api/DeliveryRoute/' + myDotNetDate,
@@ -193,13 +184,10 @@
     }
 
     function getRoute(name) {
-        //console.log("Passed name: " + name);
-        var data = eval(wholeModel);
-        //console.log(data["Viktor"]);
+        var data = eval(wholeModel);       
         console.log(JSON.stringify(data[name]));
         model = data[name];
         $("#driverPackages").text(name + ":");
-        //console.log(data[name][0]);
         for (var i = 0; i < data[name].length; i++) {
             $("#driverPackages").append("<li>" +
                 "Content: " +
