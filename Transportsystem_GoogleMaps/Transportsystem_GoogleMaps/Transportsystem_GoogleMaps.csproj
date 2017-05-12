@@ -297,6 +297,10 @@
     <Compile Include="Migrations\201705100929530_MovedDateAtributesToPackageModel.Designer.cs">
       <DependentUpon>201705100929530_MovedDateAtributesToPackageModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705101434486_FixSpellingOnVariableNames.cs" />
+    <Compile Include="Migrations\201705101434486_FixSpellingOnVariableNames.Designer.cs">
+      <DependentUpon>201705101434486_FixSpellingOnVariableNames.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -715,6 +719,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705100929530_MovedDateAtributesToPackageModel.resx">
       <DependentUpon>201705100929530_MovedDateAtributesToPackageModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705101434486_FixSpellingOnVariableNames.resx">
+      <DependentUpon>201705101434486_FixSpellingOnVariableNames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

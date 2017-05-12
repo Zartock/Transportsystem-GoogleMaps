@@ -59,21 +59,26 @@
 
     function initMap() {
 
-       
-        directionsService = new google.maps.DirectionsService;
-        directionsDisplay = new google.maps.DirectionsRenderer;
-        model = @Html.Raw(Json.Encode(new List<Package>(Model)));
+        if (@Model.Count > 0) {
+            directionsService = new google.maps.DirectionsService;
+            directionsDisplay = new google.maps.DirectionsRenderer;
+            model = @Html.Raw(Json.Encode(new List<Package>(Model)));
 
-        var center = { lat: 59.261897775, lng: 15.30572069518922 };
+            var center = { lat: 59.261897775, lng: 15.30572069518922 };
 
-        var map = new google.maps.Map(document.getElementById('map'),
-        {
-            zoom: 7,
-            center: center
-        });
-        directionsDisplay.setMap(map);
+            var map = new google.maps.Map(document.getElementById('map'),
+            {
+                zoom: 7,
+                center: center
+            });
+            directionsDisplay.setMap(map);
 
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        }
+        else {
+            document.getElementById('map').innerHTML = "<h3>No packages to deliver</h3>";
+        }
+
     }
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -97,15 +102,15 @@
                     console.log(model);
                     responseFromGoogleMaps = response.routes;
 
-                    $("#driverPackages").text( 
+                    $("#driverPackages").text(
                         model[responseFromGoogleMaps[0].waypoint_order[0]].Content +
                         " From: " +
                         responseFromGoogleMaps[0].legs[0].start_address +
                         " To: " +
                         responseFromGoogleMaps[0].legs[0].end_address +
 
-                        " Status " + model[responseFromGoogleMaps[0].waypoint_order[0]].Status 
-                    );      
+                        " Status " + model[responseFromGoogleMaps[0].waypoint_order[0]].Status
+                    );
                     directionsDisplay.setDirections(response);
                     getTotalTime(response);
 
@@ -117,44 +122,39 @@
     }
 
     function Delivered() {
-        currentPackageToDeliver++;
-        if (currentPackageToDeliver <= (responseFromGoogleMaps[0].legs.length - 2)) {
-            console.log(responseFromGoogleMaps[0].legs);
-            console.log(currentPackageToDeliver);
-            console.log((responseFromGoogleMaps[0].legs.length - 1));
-            console.log('here');
-            console.log("packageID = " + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver - 1]].Id);
-            $("#driverPackages").text( 
-                model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Content +
-                " From: " +
-                responseFromGoogleMaps[0].legs[currentPackageToDeliver].start_address +
-                " To: " +
-                responseFromGoogleMaps[0].legs[currentPackageToDeliver].end_address +
-
-                " Status " + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Status 
-            );
+        if (currentPackageToDeliver <= (responseFromGoogleMaps[0].legs.length - 1)) {
+            console.log(model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Id);
             $.ajax({
-                url: '/api/Package/' + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver-1]].Id,
+                url: '/api/Package/' + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Id,
                 type: 'POST',
                 contentType: 'application/json;',
                 success: function (data) {
-                   
-                    console.log(model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver-1]].Content + 'has been delivered');
+
                 }
             });
+            currentPackageToDeliver++;
         }
-       
+        console.log(model);
+        if (model[model.length - 1].Status === "Delivered")
+            routeComplete();
+    }
+
+    function routeComplete() {
+        console.log("Route completed");
+
+        document.getElementById("map").innerHTML = "<h3>Route complete! </h3>"
+
     }
 
     function getTotalTime(result) {
         travelTime = 0;
         var routeLegs = result.routes[0].legs;
-       
+
         for (var leg = 0; leg < routeLegs.length; leg++) {
             travelTime += routeLegs[leg].duration.value;
             travelDistance += routeLegs[leg].distance.value;
         }
-        travelDistance /= 1000; 
+        travelDistance /= 1000;
         document.getElementById('traveltime').innerHTML = "Total travel time: ";
         (travelTime / 3600 >= 1)
             ? document.getElementById('traveltime').innerHTML += Math.floor(travelTime / 3600) + "h " + Math.round((travelTime - 3600 * (Math.floor(travelTime / 3600))) / 60) + "min"

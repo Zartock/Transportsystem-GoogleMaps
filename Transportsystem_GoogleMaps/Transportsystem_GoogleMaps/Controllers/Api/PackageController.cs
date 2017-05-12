@@ -89,7 +89,10 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
         public void ChangeStatus(int id)
         {
             var packageInDb = _context.Packages.SingleOrDefault(p => p.Id == id);
+            var deliveryRouteToDelete = _context.DeliveryRoutes.Single(dr => dr.Package.Id == id);
+            _context.DeliveryRoutes.Remove(deliveryRouteToDelete);
             packageInDb.Status = "Delivered";
+            packageInDb.DateDelivered = DateTime.Now;          
             _context.SaveChanges();
         }
 

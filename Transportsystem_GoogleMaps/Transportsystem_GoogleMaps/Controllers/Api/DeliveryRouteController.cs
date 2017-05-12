@@ -98,8 +98,8 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
                     var idComp = packageList.ElementAt(j).Id;
                     var packageInDb = _context.Packages.Single(p => p.Id == idComp);
                     _context.SaveChanges();
-                    packageInDb.PlanedDeliveryDate = dt.Date;
-                    packageList.ElementAt(j).PlanedDeliveryDate = dt.Date;
+                    packageInDb.PlannedDeliveryDate = dt.Date;
+                    packageList.ElementAt(j).PlannedDeliveryDate = dt.Date;
                     routes.Add(new DeliveryRoute(driverList.ElementAt(i), packageList.ElementAt(j)));
                 }
             }
