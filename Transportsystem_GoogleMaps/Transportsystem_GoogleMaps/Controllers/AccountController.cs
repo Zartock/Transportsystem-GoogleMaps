@@ -25,7 +25,7 @@ namespace Transportsystem_GoogleMaps.Controllers
             _context = new ApplicationDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             _context = new ApplicationDbContext();
             UserManager = userManager;
@@ -38,9 +38,9 @@ namespace Transportsystem_GoogleMaps.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -124,7 +124,7 @@ namespace Transportsystem_GoogleMaps.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -160,7 +160,7 @@ namespace Transportsystem_GoogleMaps.Controllers
                 {
                     return Content("You dont have permission to register as a driver");
                 }
-               
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PersonalNumber = model.PersonalNumber };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -401,8 +401,16 @@ namespace Transportsystem_GoogleMaps.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            try
+            {
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error at AccountController/LogOff");
+            }
             return RedirectToAction("Index", "Home");
+
         }
 
         //
@@ -439,9 +447,10 @@ namespace Transportsystem_GoogleMaps.Controllers
 
         private IAuthenticationManager AuthenticationManager
         {
+            
             get
-            {
-                return HttpContext.GetOwinContext().Authentication;
+            {                
+                return HttpContext.GetOwinContext().Authentication;               
             }
         }
 

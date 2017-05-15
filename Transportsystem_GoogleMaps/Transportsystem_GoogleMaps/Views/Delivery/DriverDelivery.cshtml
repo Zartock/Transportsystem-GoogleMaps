@@ -58,11 +58,17 @@
     }
 
     function initMap() {
-
+        
         if (@Model.Count > 0) {
             directionsService = new google.maps.DirectionsService;
             directionsDisplay = new google.maps.DirectionsRenderer;
             model = @Html.Raw(Json.Encode(new List<Package>(Model)));
+
+            console.log(model);
+
+
+            console.log("Current pkg: " + currentPackageToDeliver);
+            console.log("Length:" + model.length);
 
             var center = { lat: 59.261897775, lng: 15.30572069518922 };
 
@@ -134,15 +140,37 @@
             });
             currentPackageToDeliver++;
         }
-        console.log(model);
-        if (model[model.length - 1].Status === "Delivered")
+        
+
+        console.log("Current pkg: " + currentPackageToDeliver);
+        console.log("Length:" + model.length);
+
+        if (currentPackageToDeliver === model.length) {
+            console.log("entered complete if");
             routeComplete();
+        }
+        else {
+            console.log(model);
+            $("#driverPackages").text(
+                model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Content +
+                " From: " +
+                responseFromGoogleMaps[0].legs[currentPackageToDeliver].start_address +
+                " To: " +
+                responseFromGoogleMaps[0].legs[currentPackageToDeliver].end_address +
+
+                " Status " + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Status
+            );
+
+        }
+            
     }
 
     function routeComplete() {
         console.log("Route completed");
 
-        document.getElementById("map").innerHTML = "<h3>Route complete! </h3>"
+        document.getElementById("map").innerHTML = "<h3>Route complete! </h3>";
+        document.getElementById("driverPackages").innerHTML = "";
+        document.getElementById("traveltime").innerHTML = "";
 
     }
 

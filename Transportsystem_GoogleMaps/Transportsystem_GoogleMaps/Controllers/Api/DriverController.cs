@@ -76,13 +76,22 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
-            var driverInDb = _context.Drivers.SingleOrDefault(d => d.Id == id);
-
+            var driverInDb = _context.Drivers.Single(d => d.Id == id);
+                                                        
             if (driverInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             DeleteDriverFromRoute(driverInDb);
-
+            try
+            {
+                var userToDelete = _context.Users.Single(u => u.PersonalNumber == driverInDb.PersonalNumber);
+                _context.Users.Remove(userToDelete);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Driver has no account");
+            }
+            
             _context.Drivers.Remove(driverInDb);
             _context.SaveChanges();
         }

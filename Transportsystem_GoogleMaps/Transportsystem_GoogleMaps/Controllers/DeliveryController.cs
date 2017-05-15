@@ -73,10 +73,12 @@ namespace Transportsystem_GoogleMaps.Controllers
             List<DeliveryRoute> allDestinations = new List<DeliveryRoute>();
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var currentUser = manager.FindById(User.Identity.GetUserId());
-            string s = currentUser.PersonalNumber;
+
 
             try
             {
+                string s = currentUser.PersonalNumber;
+                manager.Users.Single(u => u.PersonalNumber == currentUser.PersonalNumber);
                 var driver = _context.Drivers.SingleOrDefault(d => d.PersonalNumber == s);
                 var packages = _context.Packages.ToList();
 
@@ -85,6 +87,9 @@ namespace Transportsystem_GoogleMaps.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
+                AccountController ac = new AccountController();
+                ac.LogOff();
+                return View("Index", "Home");
             }
 
             foreach (var delivery in allDestinations)
