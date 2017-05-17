@@ -113,14 +113,6 @@ namespace Transportsystem_GoogleMaps.Controllers.Api
             return Ok();
         }
 
-        [HttpPut]
-        public void UpdateDeliveredDate(int id)
-        {
-            
-
-        }
-
-
         [HttpDelete]
         public void Delete()
         {

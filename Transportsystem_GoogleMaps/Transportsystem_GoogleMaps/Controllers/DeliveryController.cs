@@ -21,7 +21,6 @@ namespace Transportsystem_GoogleMaps.Controllers
         public DeliveryController()
         {
             _context = new ApplicationDbContext();
-             
         }
 
         protected override void Dispose(bool disposing)
@@ -47,7 +46,7 @@ namespace Transportsystem_GoogleMaps.Controllers
 
             foreach (var driver in driverList)
             {
-                var tmp = deliveryRouteList.FindAll(d => d.Driver == driver);
+                var tmp = deliveryRouteList.FindAll(d => d.Driver.Id == driver.Id);
                 List<Package> tmpPackageList = new List<Package>();
                 foreach (var deliveryRoute in tmp)
                 {

@@ -96,6 +96,10 @@ namespace Transportsystem_GoogleMaps.Controllers
                 packageInDb.Content = package.Content;
                 packageInDb.Destination = package.Destination;
                 packageInDb.Status = package.Status;
+                if (package.Status == "Undelivered")
+                {
+                    packageInDb.DateDelivered = null;
+                }
             }
             _context.SaveChanges();
 

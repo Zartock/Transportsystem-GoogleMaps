@@ -105,10 +105,6 @@
         wholeModel = @Html.Raw(Json.Encode(Model.DeliveryByDriver));
         console.log(wholeModel);
 
-        
-
-        @*model = @Html.Raw(Json.Encode(new List<Package>(Model.DeliveryByDriver[Model.Drivers[0].Name])));*@
-
         var center = { lat: 59.261897775, lng: 15.30572069518922 };
 
         var map = new google.maps.Map(document.getElementById('map'),
@@ -194,8 +190,6 @@
                 data[name][i].Content +
                 " Destination: " +
                 data[name][i].Destination +
-                " Status: " +
-                data[name][i].Status +
                 "</li>");
         }
         document.getElementById('driverDropDown').innerHTML = name + ' <span class="caret"></span>';

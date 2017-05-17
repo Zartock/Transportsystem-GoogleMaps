@@ -113,9 +113,7 @@
                         " From: " +
                         responseFromGoogleMaps[0].legs[0].start_address +
                         " To: " +
-                        responseFromGoogleMaps[0].legs[0].end_address +
-
-                        " Status " + model[responseFromGoogleMaps[0].waypoint_order[0]].Status
+                        responseFromGoogleMaps[0].legs[0].end_address 
                     );
                     directionsDisplay.setDirections(response);
                     getTotalTime(response);
@@ -156,9 +154,7 @@
                 " From: " +
                 responseFromGoogleMaps[0].legs[currentPackageToDeliver].start_address +
                 " To: " +
-                responseFromGoogleMaps[0].legs[currentPackageToDeliver].end_address +
-
-                " Status " + model[responseFromGoogleMaps[0].waypoint_order[currentPackageToDeliver]].Status
+                responseFromGoogleMaps[0].legs[currentPackageToDeliver].end_address 
             );
 
         }
