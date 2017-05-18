@@ -12,7 +12,7 @@ namespace Transportsystem_GoogleMaps.Models
 
         [Required]
         [StringLength(50, ErrorMessage = "Name can only be 50 letters long")]
-        [RegularExpression("(^[\\w]+[\\w]+(\\s[\\w]+[\\w])*)", ErrorMessage = "Name can contain only letters")]
+        [RegularExpression("(^[A-Za-zåäöÅÄÖ]+[A-Za-zåäöÅÄÖ]+(\\s[A-Za-zåäöÅÄÖ]+)*)", ErrorMessage = "Name can contain only letters")]
 
         public string Name { get; set; }
 

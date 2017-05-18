@@ -130,21 +130,38 @@ namespace Transportsystem_GoogleMaps.Models
         {
             bool changes = true;
             LinkedList<PackageCluster> clusterCent = new LinkedList<PackageCluster>();
-            InitializeClusters(ref clusterCent);
-
-            AssignPackagesToNearestCluster(ref clusterCent);
-            AlterCentroidPosition(ref clusterCent, ref changes);
-
-            //repeat until no changes
-            while (changes)
+            if (numOfDrivers > 0 && Packages.Count > 0)
             {
-                foreach (var cluster in clusterCent)
-                {
-                    cluster.AssignedPackages.Clear();
-                }
+                InitializeClusters(ref clusterCent);
+
                 AssignPackagesToNearestCluster(ref clusterCent);
                 AlterCentroidPosition(ref clusterCent, ref changes);
+
+                //repeat until no changes
+                while (changes)
+                {
+                    foreach (var cluster in clusterCent)
+                    {
+                        cluster.AssignedPackages.Clear();
+                    }
+                    AssignPackagesToNearestCluster(ref clusterCent);
+                    AlterCentroidPosition(ref clusterCent, ref changes);
+                }
+
+                //Package p = new Package();
+                //for (int i = 0; i < numOfDrivers; i++)
+                //{
+                //    clusterCent.AddFirst(new PackageCluster(p));
+                //}
+
+                //for (int i = 0; i < Packages.Count; i++)
+                //{
+                //    clusterCent.ElementAt(i % numOfDrivers).AssignedPackages.AddFirst(Packages.ElementAt(i));
+                //}
             }
+
+
+
             return clusterCent;
         }
     }
