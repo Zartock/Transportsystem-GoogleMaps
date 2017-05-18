@@ -100,6 +100,21 @@ namespace Transportsystem_GoogleMaps.Controllers
                 {
                     packageInDb.DateDelivered = null;
                 }
+                else
+                {
+                    try
+                    {
+                        packageInDb.Status = "Delivered";
+                        packageInDb.DateDelivered = DateTime.Now;
+                        // if route already been deleted catch
+                        var deliveryRouteToDelete = _context.DeliveryRoutes.Single(dr => dr.Package.Id == package.Id);
+                        _context.DeliveryRoutes.Remove(deliveryRouteToDelete);
+                    }
+                    catch (Exception e)
+                    {
+                        
+                    }
+                }
             }
             _context.SaveChanges();
 
